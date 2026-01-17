@@ -1,7 +1,7 @@
 {
   "name": "base16-ultimate-bundle-syntax",
   "theme": "syntax",
-  "main": "./lib/base16c",
+  "main": "./lib/base16bundle",
   "version": "1.8.1",
   "description": "A Base16 syntax theme with support for all Base16 color schemes and styles.",
   "keywords": [
