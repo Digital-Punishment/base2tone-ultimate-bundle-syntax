@@ -3,7 +3,7 @@
   "theme": "syntax",
   "main": "./lib/base16bundle",
   "version": "1.8.1",
-  "description": "A Base16 syntax theme with support for all Base16 color schemes and styles.",
+  "description": "A Base16 syntax theme bundle for Pulsar with support for all Base16 color schemes.",
   "keywords": [
     "0x96f",
     "3024",
@@ -219,7 +219,21 @@
     "zenbones",
     "zenburn"
   ],
-  "repository": "https://github.com/Digital-Punishment/base16-compilation-syntax",
+  "files": [
+    "!.git*",
+    "!schemes",
+    "!tools",
+    "lib",
+    "styles",
+    "banner.png",
+    "CHANGELOG.md",
+    "index.less",
+    "LICENSE.md",
+    "package.json",
+    "preview.gif",
+    "README.md"
+  ],
+  "repository": "https://github.com/Digital-Punishment/base16-ultimate-bundle-syntax",
   "license": "MIT",
   "engines": {
     "atom": ">=1.100.0 <2.0.0"
