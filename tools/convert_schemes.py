@@ -77,7 +77,7 @@ def convert_scheme(scheme_path: Path) -> str:
         with less_filepath.open(mode = "w") as less_file:
             less_file.write(less_content)
         spectrum_pixels = generate_pixels(spectrum_colors, 720, 20)
-        Image.fromarray(spectrum_pixels, mode="RGB").save(spectrum_filepath)
+        Image.fromarray(spectrum_pixels).save(spectrum_filepath)
         print(f"Update file: {less_filename}.less")
     else:
         print(f"File is up to date: {less_filename}.less")
