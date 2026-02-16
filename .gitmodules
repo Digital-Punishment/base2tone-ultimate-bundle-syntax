@@ -1,6 +1,6 @@
-[submodule "schemes"]
-	path = schemes
-	url = git@github.com:tinted-theming/schemes.git
+[submodule "tools/schemes"]
+	path = tools/schemes
+	url = git@github.com:atelierbram/Base2Tone.git
 [submodule "tools/spectrum"]
 	path = tools/spectrum
 	url = git@github.com:alexmirrington/base16-spectrum-generator.git
