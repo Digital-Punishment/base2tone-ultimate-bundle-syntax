@@ -1,0 +1,637 @@
+// scheme  Dark
+//Converted from https://raw.githubusercontent.com/atelierbram/Base2Tone-sublime-text/refs/heads/master/db/templates/light-alt.ejs
+
+@import 'colors';
+
+//Block Cursor 
+.syntax--block_cursor {
+  color: @base2tone-color-baseC7;   //@base2tone-color-baseC7
+  background-color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+}
+
+//Comments 
+
+.syntax--comment {
+  color: @base2tone-color-baseC4;   //@base2tone-color-baseC4
+
+  //Comments 
+  &.syntax--block.syntax--html {
+    color: @base2tone-color-baseC4;   //@base2tone-color-baseC4
+  }
+  &.syntax--line.syntax--double-slash {
+  
+    //Comments 
+    &.syntax--js {
+      color: @base2tone-color-baseC4;   //@base2tone-color-baseC4
+    }
+  
+    //Comments 
+    &.syntax--php {
+      color: @base2tone-color-baseC4;   //@base2tone-color-baseC4
+    }
+  }
+}
+
+//Constants 
+
+.syntax--constant {
+  color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
+
+  //Support 
+  &.syntax--character {
+    color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+  
+    //Escape Characters 
+    &.syntax--escape {
+      color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
+    }
+  }
+
+  //Support 
+  &.syntax--language {
+    color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+  
+    //Integers 
+    &.syntax--boolean {
+      color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
+    }
+  }
+
+  //Support 
+  &.syntax--numeric {
+    color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+  
+    //Integers 
+    &.syntax--css {
+      color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
+    }
+  }
+
+  //Support 
+  &.syntax--other {
+    color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+  
+    //Colors 
+    &.syntax--color {
+      color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
+    }
+  
+    //Strings, Inherited Class 
+    &.syntax--symbol {
+      color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+    }
+  }
+}
+
+.syntax--entity {
+  &.syntax--name {
+  
+    //Classes 
+    &.syntax--class {
+      color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+    }
+  
+    //Functions 
+    &.syntax--function {
+      color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+    }
+  
+    //Headings 
+    &.syntax--section {
+      font-weight: normal;
+      font-style: normal;
+      color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+    }
+  
+    //Tags 
+    &.syntax--tag {
+      color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+    
+      //Functions 
+      &.syntax--block.syntax--any.syntax--html {
+        color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+      }
+    
+      //Functions 
+      &.syntax--css {
+        color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+      }
+    
+      //Comments 
+      &.syntax--doctype.syntax--html {
+        color: @base2tone-color-baseC4;   //@base2tone-color-baseC4
+      }
+    
+      //Functions 
+      &.syntax--other.syntax--html {
+        color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+      }
+    
+      //Functions 
+      &.syntax--structure.syntax--any.syntax--html {
+        color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+      }
+    
+      //Selector 
+      &.syntax--wildcard.syntax--css {
+        color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+      }
+    }
+  
+    //Classes 
+    &.syntax--type.syntax--class {
+      color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+    }
+  }
+  &.syntax--other {
+  
+    //Functions 
+    &.syntax--attribute-name {
+      color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+    
+      //Selector 
+      &.syntax--class.syntax--css {
+        color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+      }
+    
+      //Attributes 
+      &.syntax--html {
+        color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
+      }
+    
+      //Attribute IDs 
+      &.syntax--id {
+        color: @base2tone-color-baseD5;   //@base2tone-color-baseD5
+      }
+    }
+  
+    //Integers 
+    &.syntax--attribute-selector {
+      color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
+    }
+  
+    //Classes 
+    &.syntax--inherited-class {
+      color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+    }
+  }
+}
+
+.syntax--invalid {
+
+  //Broken 
+  &.syntax--broken {
+    background-color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+    color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
+  }
+
+  //Deprecated 
+  &.syntax--deprecated {
+    background-color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+    color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
+  }
+
+  //Illegal 
+  &.syntax--illegal {
+    background-color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+    color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
+  }
+
+  //Unimplemented 
+  &.syntax--unimplemented {
+    background-color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+    color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
+  }
+}
+
+//Keywords 
+
+.syntax--keyword {
+  color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
+
+  //Methods 
+  &.syntax--control {
+    color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
+  
+    //Functions 
+    &.syntax--at-rule {
+      color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+    }
+  }
+
+  //Operators 
+  &.syntax--operator {
+    color: @base2tone-color-baseD1;   //@base2tone-color-baseD1
+  
+    //Methods 
+    &.syntax--js {
+      color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
+    }
+  
+    //Selector 
+    &.syntax--sass {
+      color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+    }
+  }
+
+  //Units 
+  &.syntax--other {
+    color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
+  
+    //Methods 
+    &.syntax--special-method {
+      color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
+    }
+  
+    //Methods 
+    &.syntax--unit.syntax--css {
+      color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
+    }
+  }
+}
+
+.syntax--markup {
+
+  //Bold 
+  &.syntax--bold {
+    font-weight: bold;
+    color: @base2tone-color-baseD4;   //@base2tone-color-baseD4
+  }
+
+  //Changed 
+  &.syntax--changed {
+    color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
+  }
+
+  //Deleted 
+  &.syntax--deleted {
+    color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
+  }
+
+  //Headings 
+  &.syntax--heading .syntax--punctuation.syntax--definition.syntax--heading {
+    font-weight: normal;
+    font-style: normal;
+    color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+  }
+
+  //Inserted 
+  &.syntax--inserted {
+    color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+  }
+
+  //Italic 
+  &.syntax--italic {
+    font-style: italic;
+    color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
+  }
+
+  //Lists 
+  &.syntax--list {
+    color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
+  }
+
+  //Quotes 
+  &.syntax--quote {
+    color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
+  }
+
+  //Code 
+  &.syntax--raw.syntax--inline {
+    color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+  }
+}
+
+.syntax--meta {
+  &.syntax--brace {
+  
+    //Comments 
+    &.syntax--curly.syntax--js {
+      color: @base2tone-color-baseC4;   //@base2tone-color-baseC4
+    }
+  
+    //Comments 
+    &.syntax--round.syntax--js {
+      color: @base2tone-color-baseC4;   //@base2tone-color-baseC4
+    }
+  }
+
+  //Classes 
+  &.syntax--class {
+    color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+  }
+
+  //Functions 
+  &.syntax--function-call {
+    color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+  }
+
+  //Link Url 
+  &.syntax--link {
+    color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
+  }
+
+  //Functions 
+  &.syntax--require {
+    color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+  }
+
+  //Selector 
+  &.syntax--selector {
+    color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+  
+    //Selector 
+    &.syntax--css {
+      color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+    }
+  }
+
+  //Separator 
+  &.syntax--separator {
+    background-color: @base2tone-color-baseA7;   //@base2tone-color-baseA7
+    color: @base2tone-color-baseB3;   //@base2tone-color-baseB3
+  }
+  &.syntax--tag.syntax--sgml {
+  
+    //Comments 
+    &.syntax--doctype.syntax--html {
+      color: @base2tone-color-baseC4;   //@base2tone-color-baseC4
+    }
+  
+    //Comments 
+    &.syntax--html {
+      color: @base2tone-color-baseC4;   //@base2tone-color-baseC4
+    }
+  }
+}
+
+//Comments 
+
+.syntax--punctuation {
+  color: @base2tone-color-baseC4;   //@base2tone-color-baseC4
+  &.syntax--definition {
+  
+    //Punctuation 
+    &.syntax--array {
+      color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+    }
+  
+    //Bold 
+    &.syntax--bold {
+      font-weight: bold;
+      color: @base2tone-color-baseD4;   //@base2tone-color-baseD4
+    }
+  
+    //Comments 
+    &.syntax--comment {
+      color: @base2tone-color-baseC4;   //@base2tone-color-baseC4
+    
+      //Comments 
+      &.syntax--js {
+        color: @base2tone-color-baseC4;   //@base2tone-color-baseC4
+      }
+    
+      //Comments 
+      &.syntax--php {
+        color: @base2tone-color-baseC4;   //@base2tone-color-baseC4
+      }
+    }
+  
+    //Attribute IDs 
+    &.syntax--entity {
+      color: @base2tone-color-baseD5;   //@base2tone-color-baseD5
+    
+      //Comments 
+      &.syntax--css {
+        color: @base2tone-color-baseC4;   //@base2tone-color-baseC4
+      }
+    }
+  
+    //Italic 
+    &.syntax--italic {
+      font-style: italic;
+      color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
+    }
+  
+    //Punctuation 
+    &.syntax--parameters {
+      color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+    }
+  
+    //Punctuation 
+    &.syntax--string {
+      color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+    
+      //Link Text 
+      &.syntax--end.syntax--markdown {
+        color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
+      }
+    }
+  
+    //Punctuation 
+    &.syntax--variable {
+      color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+    }
+  }
+
+  //Embedded 
+  &.syntax--section.syntax--embedded {
+    color: @base2tone-color-baseB1;   //@base2tone-color-baseB1
+  
+    //Comments 
+    &.syntax--begin.syntax--php {
+      color: @base2tone-color-baseC4;   //@base2tone-color-baseC4
+    }
+  }
+}
+
+.syntax--source {
+  &.syntax--java .syntax--meta.syntax--class.syntax--java .syntax--meta {
+  
+    //Java Class Body 
+    &.syntax--class.syntax--body.syntax--java {
+      color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+    }
+  
+    //Java Source 
+    &.syntax--method.syntax--java {
+      color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+    }
+  }
+
+  //Operators 
+  &.syntax--js {
+    color: @base2tone-color-baseD1;   //@base2tone-color-baseD1
+      .syntax--meta {
+          &.syntax--block.syntax--js {
+      
+        //Javascript: Block Variables in Function Calls 
+        .syntax--meta.syntax--function-call.syntax--method.syntax--js .syntax--variable.syntax--other.syntax--readwrite.syntax--js {
+          color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+        }
+              .syntax--variable.syntax--other {
+        
+          //Javascript: Block Variables 
+          &.syntax--object.syntax--js {
+            color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+          }
+        
+          //Javascript: New Block Variables 
+          &.syntax--readwrite.syntax--js {
+            color: @base2tone-color-baseD4;   //@base2tone-color-baseD4
+          }
+        }
+      }
+    
+      //Javascript: Function Arguments 
+      &.syntax--function.syntax--js .syntax--variable.syntax--parameter.syntax--function.syntax--js {
+        color: @base2tone-color-baseD4;   //@base2tone-color-baseD4
+      }
+          &.syntax--function-call.syntax--method.syntax--js .syntax--variable {
+      
+        //Javascript: Function Calls 
+        &.syntax--function.syntax--js {
+          color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+        }
+      
+        //Javascript: Variables in Function Calls 
+        &.syntax--other.syntax--readwrite.syntax--js {
+          color: @base2tone-color-baseD4;   //@base2tone-color-baseD4
+        }
+      }
+    
+      //Javascript: Properties 
+      &.syntax--property.syntax--object.syntax--js .syntax--entity.syntax--name.syntax--function.syntax--js {
+        color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+      }
+    }
+  
+    //Javascript: Prototypes 
+    .syntax--support.syntax--constant.syntax--prototype.syntax--js {
+      color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+    }
+      .syntax--variable.syntax--other {
+    
+      //Javascript: Variables 
+      &.syntax--object.syntax--js {
+        color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+      }
+    
+      //Javascript: New Variables 
+      &.syntax--readwrite.syntax--js {
+        color: @base2tone-color-baseD4;   //@base2tone-color-baseD4
+      }
+    }
+  }
+
+  //Comments 
+  &.syntax--php {
+    color: @base2tone-color-baseC4;   //@base2tone-color-baseC4
+  
+    //Comments 
+    &.syntax--embedded.syntax--block.syntax--html {
+      color: @base2tone-color-baseC4;   //@base2tone-color-baseC4
+    }
+  }
+}
+
+//Storage 
+
+.syntax--storage {
+  color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
+
+  //Functions 
+  &.syntax--type {
+    color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+  }
+}
+
+//Strings, Inherited Class 
+
+.syntax--string {
+  color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+
+  //Link Text 
+  &.syntax--other.syntax--link {
+    color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
+  }
+  &.syntax--quoted {
+  
+    //Integers 
+    &.syntax--double {
+      color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
+    }
+  
+    //Integers 
+    &.syntax--single {
+      color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
+    }
+  }
+
+  //Regular Expressions 
+  &.syntax--regexp {
+    color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
+  }
+}
+
+.syntax--support {
+
+  //Support 
+  &.syntax--constant {
+    color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+  }
+
+  //Operators 
+  &.syntax--function {
+    color: @base2tone-color-baseD1;   //@base2tone-color-baseD1
+  
+    //Functions 
+    &.syntax--any-method {
+      color: @base2tone-color-baseD0;   //@base2tone-color-baseD0
+    }
+  
+    //Operators 
+    &.syntax--construct {
+      color: @base2tone-color-baseD1;   //@base2tone-color-baseD1
+    }
+  }
+
+  //Operators 
+  &.syntax--type.syntax--property-name.syntax--css {
+    color: @base2tone-color-baseD1;   //@base2tone-color-baseD1
+  }
+}
+
+.syntax--text.syntax--html {
+
+  //Text 
+  &.syntax--basic {
+    color: @base2tone-color-baseD1;   //@base2tone-color-baseD1
+  }
+
+  //Comments 
+  &.syntax--mt {
+    color: @base2tone-color-baseC4;   //@base2tone-color-baseC4
+  }
+}
+
+//Variables 
+
+.syntax--variable {
+  color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
+
+  //Embedded 
+  &.syntax--interpolation {
+    color: @base2tone-color-baseB1;   //@base2tone-color-baseB1
+  }
+
+  //Variables 
+  &.syntax--other {
+    color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
+  }
+
+  //Variables 
+  &.syntax--parameter.syntax--function {
+    color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
+  }
+}

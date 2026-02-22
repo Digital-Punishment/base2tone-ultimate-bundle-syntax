@@ -11,37 +11,61 @@ import re
 import requests
 import time
 
-base16_dark = "https://raw.githubusercontent.com/base16-builder/base16-builder/refs/heads/master/db/templates/textmate/dark.ejs"
-base16_light = "https://raw.githubusercontent.com/base16-builder/base16-builder/refs/heads/master/db/templates/textmate/light.ejs"
-base16_tinted = "https://raw.githubusercontent.com/tinted-theming/tinted-sublime-text/refs/heads/main/templates/base16-color-scheme.mustache"
+template_urls = [
+    "https://raw.githubusercontent.com/atelierbram/Base2Tone-sublime-text/refs/heads/master/db/templates/dark.ejs",
+    "https://raw.githubusercontent.com/atelierbram/Base2Tone-sublime-text/refs/heads/master/db/templates/light.ejs",
+    "https://raw.githubusercontent.com/atelierbram/Base2Tone-sublime-text/refs/heads/master/db/templates/dark-alt.ejs",
+    "https://raw.githubusercontent.com/atelierbram/Base2Tone-sublime-text/refs/heads/master/db/templates/light-alt.ejs",
+]
 
 templates_dir = "./templates"
-styles_dir = "./styles"
+styles_dir = "../styles"
+
+settings_path = "../lib/base16bundle_settings.json"
 
 MAX_AGE = 30 #days
 
 colors_dict = {
-    "black":           "00",
-    "very-dark-gray":  "01",
-    "dark-gray":       "02",
-    "gray":            "03",
-    "light-gray":      "04",
-    "very-light-gray": "05",
-    "almost-white":    "06",
-    "white":           "07",
+    "base2tone-color-baseA0": "A0",
+    "base2tone-color-baseA1": "A1",
+    "base2tone-color-baseA2": "A2",
+    "base2tone-color-baseA3": "A3",
+    "base2tone-color-baseA4": "A4",
+    "base2tone-color-baseA5": "A5",
+    "base2tone-color-baseA6": "A6",
+    "base2tone-color-baseA7": "A7",
 
-    "red":             "08",
-    "orange":          "09",
-    "yellow":          "0A",
-    "green":           "0B",
-    "cyan":            "0C",
-    "blue":            "0D",
-    "purple":          "0E",
-    "brown":           "0F",
+    "base2tone-color-baseB0": "B0",
+    "base2tone-color-baseB1": "B1",
+    "base2tone-color-baseB2": "B2",
+    "base2tone-color-baseB3": "B3",
+    "base2tone-color-baseB4": "B4",
+    "base2tone-color-baseB5": "B5",
+    "base2tone-color-baseB6": "B6",
+    "base2tone-color-baseB7": "B7",
+
+    "base2tone-color-baseC0": "C0",
+    "base2tone-color-baseC1": "C1",
+    "base2tone-color-baseC2": "C2",
+    "base2tone-color-baseC3": "C3",
+    "base2tone-color-baseC4": "C4",
+    "base2tone-color-baseC5": "C5",
+    "base2tone-color-baseC6": "C6",
+    "base2tone-color-baseC7": "C7",
+
+    "base2tone-color-baseD0": "D0",
+    "base2tone-color-baseD1": "D1",
+    "base2tone-color-baseD2": "D2",
+    "base2tone-color-baseD3": "D3",
+    "base2tone-color-baseD4": "D4",
+    "base2tone-color-baseD5": "D5",
+    "base2tone-color-baseD6": "D6",
+    "base2tone-color-baseD7": "D7",
 }
-base16_dict = {v: k for k, v in colors_dict.items()}
+base2tone_dict = {v: k for k, v in colors_dict.items()}
 
 lambda i: i.split("_")[1].upper()
+
 
 def get_template(url : str) -> dict:
     """Get scheme template from github."""
@@ -111,7 +135,7 @@ def parse_ejs_template(theme_data: dict) -> dict:
             for rule in i["scope"].split(", "):
                 always_merger.merge(
                     rules,
-                    add_rule(rule, i["name"], i_settings),
+                    add_rule(rule.strip(" "), i["name"], i_settings),
                 )
 
     #             print(i["name"], "\n ", len(rule.split(".")), " ", rule, "\n", i["settings"])
@@ -203,16 +227,16 @@ def less_color(text_element : str) -> str:
     """Extract color code from string."""
     #{{base01-hex}} in mustache
     # base["0B"]["hex"] in ejs
-    color_match = re.search(r'base\["\d(\d|\D)"\]\["hex"\]', text_element)
+    color_match = re.search(r'base\["(\d|\D)(\d|\D)"\]\["hex"\]', text_element)
     if not color_match:
-        color_match = re.search(r"{{base\d(\d|\D)-hex}}", text_element)
-    color_idx = color_match[0] if color_match else "0E"
+        color_match = re.search(r"{{base(\d|\D)(\d|\D)-hex}}", text_element)
+    color_idx = color_match[0] if color_match else "A0"
     if not color_match:
         print("---!!! no match !!!---", text_element)
     color_idx = color_idx.removeprefix('base["').removesuffix('"]["hex"]')
     color_idx = color_idx.removeprefix("{{base").removesuffix("-hex}}")
 
-    return f"@{base16_dict[color_idx]};   //@base16-color-base{color_idx}"
+    return f"@{base2tone_dict[color_idx]};   //@base2tone-color-base{color_idx}"
 
 
 def generate_variables(theme : dict, source : str) ->str:
@@ -295,7 +319,6 @@ def generate_variables(theme : dict, source : str) ->str:
     result += "@syntax-color-snippet:                      @green;                     //@base16-color-base0B;\n"
     result += "@syntax-color-string:                       @green;                     //@base16-color-base0B;\n"
 
-
     return result
 
 
@@ -374,9 +397,11 @@ def use_rule(rule : dict, rule_scope : str, indentation : int) -> str:
 
     return result
 
+
 def indent(indentation: int) -> str:
     """Generate indentation string with spaces."""
     return (" " * indentation)
+
 
 def format_setting(setting: str, value: str, indentation: int) -> str:
     """Format each css attribute."""
@@ -413,17 +438,19 @@ def format_setting(setting: str, value: str, indentation: int) -> str:
 
 def write_style(content : str, filename : str) -> NoReturn:
     """Write .less style to a file."""
-    if not Path(styles_dir).exists():
-        Path(styles_dir).mkdir(parents = True)
     style_path = Path(styles_dir) / Path(filename).with_suffix(".less")
+    if not Path(style_path.parent).exists():
+        Path(style_path.parent).mkdir(parents = True)
 
     with Path.open(style_path, "w") as style_file:
         style_file.write(content)
+
 
 def convert_template(template_path : str) -> NoReturn:
     """Convert file from Sublime/Textmate template to Pulsar theme."""
     template_data = get_template(template_path)
     parsed = {}
+    style_name = ""
     if len(template_data) != 0:
         # pprint.pp(template_data)
         if PurePath(template_path).suffix == ".ejs":
@@ -435,11 +462,16 @@ def convert_template(template_path : str) -> NoReturn:
         theme_syntax = generate_syntax(parsed, template_path)
         # print("\nVariables:\n", theme_variables)
         # print("\nSyntax:\n", theme_syntax)
-        write_style(theme_variables, "syntax-variables_" + PurePath(template_path).stem)
-        write_style(theme_syntax, "syntax_" + PurePath(template_path).stem)
+        style_name = PurePath(template_path).stem
+        write_style(theme_variables, style_name + "/syntax-variables")
+        write_style(theme_syntax, style_name + "/syntax")
+    return style_name
 
 
 if __name__ == "__main__":
-    convert_template(base16_dark)
-    convert_template(base16_light)
-    convert_template(base16_tinted)
+    style_list = [convert_template(style).replace("-", " ").title() for style in template_urls]
+    with Path(settings_path).open(mode = "r") as settings_file:
+        settings_content = json.loads(settings_file.read())
+    settings_content["config"]["style"]["enum"] = sorted(style_list)
+    with Path(settings_path).open(mode = "w") as settings_file:
+        json.dump(settings_content, settings_file, indent = 2)

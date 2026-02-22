@@ -4,7 +4,7 @@
       "order": 1,
       "title": "Color Scheme",
       "type": "string",
-      "default": "Default Dark",
+      "default": "Evening",
       "enum": [
         "Cave",
         "Desert",
@@ -35,12 +35,17 @@
       "type": "boolean",
       "default": true
     },
-    "invertColors": {
+    "style": {
       "order": 3,
-      "title": "Invert Colors",
-      "description": "Invert text and background colors to create *Light* theme from *Dark* scheme and vice versa. Syntax highlighting colors are not affected",
-      "type": "boolean",
-      "default": false
+      "title": "Style",
+      "type": "string",
+      "default": "Dark",
+      "enum": [
+        "Dark",
+        "Dark Alt",
+        "Light",
+        "Light Alt"
+      ]
     }
   }
 }
