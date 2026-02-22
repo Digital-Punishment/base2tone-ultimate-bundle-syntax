@@ -1,7 +1,7 @@
 {
   "name": "base2tone-ultimate-bundle-syntax",
   "theme": "syntax",
-  "main": "./lib/base16bundle",
+  "main": "./lib/base2tone_bundle",
   "version": "1.8.1",
   "description": "A Base2Tone syntax theme bundle for Pulsar with support for all Base2Tone color schemes.",
   "keywords": [
