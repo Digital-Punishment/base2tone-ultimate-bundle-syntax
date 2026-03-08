@@ -245,7 +245,6 @@ def generate_variables(theme : dict, source : str) ->str:
     result = ""
     result += f"//{theme["name"]}\n"
     result += f"//Converted from {source}\n"
-    result += "\n@import 'colors';\n"
 
     result += "\n// General colors\n"
     text_color = theme["settings"]["foreground"]

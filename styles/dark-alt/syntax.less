@@ -1,72 +1,71 @@
 // scheme  Dark
 //Converted from https://raw.githubusercontent.com/atelierbram/Base2Tone-sublime-text/refs/heads/master/db/templates/dark-alt.ejs
 
-@import 'colors';
 
-//Block Cursor 
+//Block Cursor
 .syntax--block_cursor {
   color: @base2tone-color-baseA0;   //@base2tone-color-baseA0
   background-color: @base2tone-color-baseD4;   //@base2tone-color-baseD4
 }
 
-//Comments 
+//Comments
 
 .syntax--comment {
   color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
 
-  //Comments 
+  //Comments
   &.syntax--block.syntax--html {
     color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
   }
   &.syntax--line.syntax--double-slash {
-  
-    //Comments 
+
+    //Comments
     &.syntax--js {
       color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
     }
-  
-    //Comments 
+
+    //Comments
     &.syntax--php {
       color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
     }
   }
 }
 
-//Constants 
+//Constants
 
 .syntax--constant {
   color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
 
-  //Support 
+  //Support
   &.syntax--character {
     color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
-  
-    //Escape Characters 
+
+    //Escape Characters
     &.syntax--escape {
       color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
     }
   }
 
-  //Support 
+  //Support
   &.syntax--language {
     color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
   }
 
-  //Integers 
+  //Integers
   &.syntax--numeric {
     color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
   }
 
-  //Support 
+  //Support
   &.syntax--other {
     color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
-  
-    //Colors 
+
+    //Colors
     &.syntax--color {
       color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
     }
-  
-    //Strings, Inherited Class 
+
+    //Strings, Inherited Class
     &.syntax--symbol {
       color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
     }
@@ -75,87 +74,87 @@
 
 .syntax--entity {
   &.syntax--name {
-  
-    //Classes 
+
+    //Classes
     &.syntax--class {
       color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
     }
-  
-    //Functions 
+
+    //Functions
     &.syntax--function {
       color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
     }
-  
-    //Headings 
+
+    //Headings
     &.syntax--section {
       font-weight: normal;
       font-style: normal;
       color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
     }
-  
-    //Tags 
+
+    //Tags
     &.syntax--tag {
       color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
-    
-      //Functions 
+
+      //Functions
       &.syntax--block.syntax--any.syntax--html {
         color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
       }
-    
-      //Functions 
+
+      //Functions
       &.syntax--css {
         color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
       }
-    
-      //Comments 
+
+      //Comments
       &.syntax--doctype.syntax--html {
         color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
       }
-    
-      //Functions 
+
+      //Functions
       &.syntax--other.syntax--html {
         color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
       }
-    
-      //Functions 
+
+      //Functions
       &.syntax--structure.syntax--any.syntax--html {
         color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
       }
-    
-      //Selector 
+
+      //Selector
       &.syntax--wildcard.syntax--css {
         color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
       }
     }
-  
-    //Classes 
+
+    //Classes
     &.syntax--type.syntax--class {
       color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
     }
   }
   &.syntax--other {
-  
-    //Functions 
+
+    //Functions
     &.syntax--attribute-name {
       color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
-    
-      //Selector 
+
+      //Selector
       &.syntax--class.syntax--css {
         color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
       }
-    
-      //Attributes 
+
+      //Attributes
       &.syntax--html {
         color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
       }
-    
-      //Attribute IDs 
+
+      //Attribute IDs
       &.syntax--id {
         color: @base2tone-color-baseD5;   //@base2tone-color-baseD5
       }
     }
-  
-    //Classes 
+
+    //Classes
     &.syntax--inherited-class {
       color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
     }
@@ -164,61 +163,61 @@
 
 .syntax--invalid {
 
-  //Broken 
+  //Broken
   &.syntax--broken {
     background-color: @base2tone-color-baseD3;   //@base2tone-color-baseD3
     color: @base2tone-color-baseA0;   //@base2tone-color-baseA0
   }
 
-  //Deprecated 
+  //Deprecated
   &.syntax--deprecated {
     background-color: @base2tone-color-baseB1;   //@base2tone-color-baseB1
     color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
   }
 
-  //Illegal 
+  //Illegal
   &.syntax--illegal {
     background-color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
     color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
   }
 
-  //Unimplemented 
+  //Unimplemented
   &.syntax--unimplemented {
     background-color: @base2tone-color-baseA3;   //@base2tone-color-baseA3
     color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
   }
 }
 
-//Keywords 
+//Keywords
 
 .syntax--keyword {
   color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
 
-  //Operators 
+  //Operators
   &.syntax--control {
     color: @base2tone-color-baseD4;   //@base2tone-color-baseD4
-  
-    //Functions 
+
+    //Functions
     &.syntax--at-rule {
       color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
     }
   }
 
-  //Operators 
+  //Operators
   &.syntax--operator {
     color: @base2tone-color-baseD4;   //@base2tone-color-baseD4
-  
-    //Selector 
+
+    //Selector
     &.syntax--sass {
       color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
     }
   }
 
-  //Units 
+  //Units
   &.syntax--other {
     color: @base2tone-color-baseD4;   //@base2tone-color-baseD4
-  
-    //Methods 
+
+    //Methods
     &.syntax--special-method {
       color: @base2tone-color-baseD5;   //@base2tone-color-baseD5
     }
@@ -227,51 +226,51 @@
 
 .syntax--markup {
 
-  //Bold 
+  //Bold
   &.syntax--bold {
     font-weight: bold;
     color: @base2tone-color-baseD4;   //@base2tone-color-baseD4
   }
 
-  //Changed 
+  //Changed
   &.syntax--changed {
     color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
   }
 
-  //Deleted 
+  //Deleted
   &.syntax--deleted {
     color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
   }
 
-  //Headings 
+  //Headings
   &.syntax--heading .syntax--punctuation.syntax--definition.syntax--heading {
     font-weight: normal;
     font-style: normal;
     color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
   }
 
-  //Inserted 
+  //Inserted
   &.syntax--inserted {
     color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
   }
 
-  //Italic 
+  //Italic
   &.syntax--italic {
     font-style: italic;
     color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
   }
 
-  //Lists 
+  //Lists
   &.syntax--list {
     color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
   }
 
-  //Quotes 
+  //Quotes
   &.syntax--quote {
     color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
   }
 
-  //Code 
+  //Code
   &.syntax--raw.syntax--inline {
     color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
   }
@@ -279,67 +278,67 @@
 
 .syntax--meta {
   &.syntax--brace {
-  
-    //Punctuation 
+
+    //Punctuation
     &.syntax--curly.syntax--js {
       color: @base2tone-color-baseA2;   //@base2tone-color-baseA2
     }
-  
-    //Comments 
+
+    //Comments
     &.syntax--round.syntax--js {
       color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
     }
   }
 
-  //Classes 
+  //Classes
   &.syntax--class {
     color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
   }
 
-  //Functions 
+  //Functions
   &.syntax--function-call {
     color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
   }
 
-  //Link Url 
+  //Link Url
   &.syntax--link {
     color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
   }
 
-  //Functions 
+  //Functions
   &.syntax--require {
     color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
   }
 
-  //Selector 
+  //Selector
   &.syntax--selector {
     color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
-  
-    //Selector 
+
+    //Selector
     &.syntax--css {
       color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
     }
   }
 
-  //Separator 
+  //Separator
   &.syntax--separator {
     background-color: @base2tone-color-baseA2;   //@base2tone-color-baseA2
     color: @base2tone-color-baseB3;   //@base2tone-color-baseB3
   }
   &.syntax--tag {
-  
-    //Functions 
+
+    //Functions
     &.syntax--block.syntax--any.syntax--html {
       color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
     }
       &.syntax--sgml {
-    
-      //Comments 
+
+      //Comments
       &.syntax--doctype.syntax--html {
         color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
       }
-    
-      //Comments 
+
+      //Comments
       &.syntax--html {
         color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
       }
@@ -347,80 +346,80 @@
   }
 }
 
-//Comments 
+//Comments
 
 .syntax--punctuation {
   color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
   &.syntax--definition {
-  
-    //Punctuation 
+
+    //Punctuation
     &.syntax--array {
       color: @base2tone-color-baseA2;   //@base2tone-color-baseA2
     }
-  
-    //Bold 
+
+    //Bold
     &.syntax--bold {
       font-weight: bold;
       color: @base2tone-color-baseD4;   //@base2tone-color-baseD4
     }
-  
-    //Comments 
+
+    //Comments
     &.syntax--comment {
       color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
-    
-      //Comments 
+
+      //Comments
       &.syntax--js {
         color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
       }
-    
-      //Comments 
+
+      //Comments
       &.syntax--php {
         color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
       }
     }
-  
-    //Attribute IDs 
+
+    //Attribute IDs
     &.syntax--entity {
       color: @base2tone-color-baseD5;   //@base2tone-color-baseD5
-    
-      //Comments 
+
+      //Comments
       &.syntax--css {
         color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
       }
     }
-  
-    //Italic 
+
+    //Italic
     &.syntax--italic {
       font-style: italic;
       color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
     }
-  
-    //Punctuation 
+
+    //Punctuation
     &.syntax--parameters {
       color: @base2tone-color-baseA2;   //@base2tone-color-baseA2
     }
-  
-    //Punctuation 
+
+    //Punctuation
     &.syntax--string {
       color: @base2tone-color-baseA2;   //@base2tone-color-baseA2
-    
-      //Link Text 
+
+      //Link Text
       &.syntax--end.syntax--markdown {
         color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
       }
     }
-  
-    //Punctuation 
+
+    //Punctuation
     &.syntax--variable {
       color: @base2tone-color-baseA2;   //@base2tone-color-baseA2
     }
   }
 
-  //Embedded 
+  //Embedded
   &.syntax--section.syntax--embedded {
     color: @base2tone-color-baseB1;   //@base2tone-color-baseB1
-  
-    //Comments 
+
+    //Comments
     &.syntax--begin.syntax--php {
       color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
     }
@@ -429,128 +428,128 @@
 
 .syntax--source {
   &.syntax--java .syntax--meta.syntax--class.syntax--java .syntax--meta {
-  
-    //Java Class Body 
+
+    //Java Class Body
     &.syntax--class.syntax--body.syntax--java {
       color: @base2tone-color-baseC7;   //@base2tone-color-baseC7
     }
-  
-    //Java Source 
+
+    //Java Source
     &.syntax--method.syntax--java {
       color: @base2tone-color-baseC7;   //@base2tone-color-baseC7
     }
   }
 
-  //Strings, Inherited Class 
+  //Strings, Inherited Class
   &.syntax--js {
     color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
       .syntax--meta {
           &.syntax--block.syntax--js {
-      
-        //Javascript: Block Variables in Function Calls 
+
+        //Javascript: Block Variables in Function Calls
         .syntax--meta.syntax--function-call.syntax--method.syntax--js .syntax--variable.syntax--other.syntax--readwrite.syntax--js {
           color: @base2tone-color-baseC7;   //@base2tone-color-baseC7
         }
               .syntax--variable.syntax--other {
-        
-          //Javascript: Block Variables 
+
+          //Javascript: Block Variables
           &.syntax--object.syntax--js {
             color: @base2tone-color-baseC7;   //@base2tone-color-baseC7
           }
-        
-          //Javascript: New Block Variables 
+
+          //Javascript: New Block Variables
           &.syntax--readwrite.syntax--js {
             color: @base2tone-color-baseD3;   //@base2tone-color-baseD3
           }
         }
       }
-    
-      //Javascript: Function Arguments 
+
+      //Javascript: Function Arguments
       &.syntax--function.syntax--js .syntax--variable.syntax--parameter.syntax--function.syntax--js {
         color: @base2tone-color-baseD3;   //@base2tone-color-baseD3
       }
           &.syntax--function-call.syntax--method.syntax--js .syntax--variable {
-      
-        //Javascript: Function Calls 
+
+        //Javascript: Function Calls
         &.syntax--function.syntax--js {
           color: @base2tone-color-baseC7;   //@base2tone-color-baseC7
         }
-      
-        //Javascript: Variables in Function Calls 
+
+        //Javascript: Variables in Function Calls
         &.syntax--other.syntax--readwrite.syntax--js {
           color: @base2tone-color-baseD3;   //@base2tone-color-baseD3
         }
       }
-    
-      //Javascript: Properties 
+
+      //Javascript: Properties
       &.syntax--property.syntax--object.syntax--js .syntax--entity.syntax--name.syntax--function.syntax--js {
         color: @base2tone-color-baseC7;   //@base2tone-color-baseC7
       }
     }
-  
-    //Javascript: Prototypes 
+
+    //Javascript: Prototypes
     .syntax--support.syntax--constant.syntax--prototype.syntax--js {
       color: @base2tone-color-baseC7;   //@base2tone-color-baseC7
     }
       .syntax--variable.syntax--other {
-    
-      //Javascript: Variables 
+
+      //Javascript: Variables
       &.syntax--object.syntax--js {
         color: @base2tone-color-baseC7;   //@base2tone-color-baseC7
       }
-    
-      //Javascript: New Variables 
+
+      //Javascript: New Variables
       &.syntax--readwrite.syntax--js {
         color: @base2tone-color-baseD3;   //@base2tone-color-baseD3
       }
     }
   }
 
-  //Comments 
+  //Comments
   &.syntax--php {
     color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
-  
-    //Comments 
+
+    //Comments
     &.syntax--embedded.syntax--block.syntax--html {
       color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
     }
   }
 }
 
-//Storage 
+//Storage
 
 .syntax--storage {
   color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
 
-  //Support 
+  //Support
   &.syntax--type {
     color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
   }
 }
 
-//Strings, Inherited Class 
+//Strings, Inherited Class
 
 .syntax--string {
   color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
 
-  //Link Text 
+  //Link Text
   &.syntax--other.syntax--link {
     color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
   }
   &.syntax--quoted {
-  
-    //Support 
+
+    //Support
     &.syntax--double {
       color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
     }
-  
-    //Support 
+
+    //Support
     &.syntax--single {
       color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
     }
   }
 
-  //Regular Expressions 
+  //Regular Expressions
   &.syntax--regexp {
     color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
   }
@@ -558,32 +557,32 @@
 
 .syntax--support {
 
-  //Operators 
+  //Operators
   &.syntax--class {
     color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
   }
 
-  //Support 
+  //Support
   &.syntax--constant {
     color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
   }
 
-  //Operators 
+  //Operators
   &.syntax--function {
     color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
-  
-    //Functions 
+
+    //Functions
     &.syntax--any-method {
       color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
     }
-  
-    //Operators 
+
+    //Operators
     &.syntax--construct {
       color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
     }
   }
 
-  //Operators 
+  //Operators
   &.syntax--type.syntax--property-name.syntax--css {
     color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
   }
@@ -591,33 +590,33 @@
 
 .syntax--text.syntax--html {
 
-  //Text 
+  //Text
   &.syntax--basic {
     color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
   }
 
-  //Comments 
+  //Comments
   &.syntax--mt {
     color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
   }
 }
 
-//Variables 
+//Variables
 
 .syntax--variable {
   color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
 
-  //Embedded 
+  //Embedded
   &.syntax--interpolation {
     color: @base2tone-color-baseB1;   //@base2tone-color-baseB1
   }
 
-  //Variables 
+  //Variables
   &.syntax--other {
     color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
   }
 
-  //Variables 
+  //Variables
   &.syntax--parameter.syntax--function {
     color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
   }

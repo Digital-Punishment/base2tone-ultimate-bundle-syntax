@@ -1,7 +1,6 @@
 // scheme  Dark
 //Converted from https://raw.githubusercontent.com/atelierbram/Base2Tone-sublime-text/refs/heads/master/db/templates/light.ejs
 
-@import 'colors';
 
 // General colors
 @syntax-text-color:                         @base2tone-color-baseC4;   //@base2tone-color-baseC4;
@@ -26,23 +25,23 @@
 @syntax-gutter-background-color-selected:   @base2tone-color-baseC7;   //@base2tone-color-baseC7;
 
 // For git diff info. i.e. in the gutter
-@syntax-color-renamed:                      @blue;                      //@base16-color-base0D;
-@syntax-color-added:                        @green;                     //@base16-color-base0B;
-@syntax-color-modified:                     @orange;                    //@base16-color-base09;
-@syntax-color-removed:                      @red;                       //@base16-color-base08;
+@syntax-color-renamed:                      @syntax-cursor-color;                      //@base16-color-base0D;
+@syntax-color-added:                        @syntax-cursor-color;                     //@base16-color-base0B;
+@syntax-color-modified:                     @syntax-cursor-color;                    //@base16-color-base09;
+@syntax-color-removed:                      @syntax-cursor-color;                       //@base16-color-base08;
 
 // For language entity colors
-@syntax-color-variable:                     @red;                       //@base16-color-base08;
-@syntax-color-comment:                      @green;                     //@base16-color-base0B;
-@syntax-color-constant:                     @orange;                    //@base16-color-base09;
+@syntax-color-variable:                     @syntax-cursor-color;                       //@base16-color-base08;
+@syntax-color-comment:                      @syntax-cursor-color;                     //@base16-color-base0B;
+@syntax-color-constant:                     @syntax-cursor-color;                    //@base16-color-base09;
 @syntax-color-property:                     @syntax-text-color;
-@syntax-color-value:                        @green;                     //@base16-color-base0B;
-@syntax-color-function:                     @blue;                      //@base16-color-base0D;
+@syntax-color-value:                        @syntax-cursor-color;                     //@base16-color-base0B;
+@syntax-color-function:                     @syntax-cursor-color;                      //@base16-color-base0D;
 @syntax-color-method:                       @syntax-color-function;
-@syntax-color-class:                        @yellow;                    //@base16-color-base0A;
-@syntax-color-keyword:                      @purple;                    //@base16-color-base0E;
-@syntax-color-tag:                          @red;                       //@base16-color-base08;
-@syntax-color-attribute:                    @orange;                    //@base16-color-base09;
-@syntax-color-import:                       @purple;                    //@base16-color-base0E;
-@syntax-color-snippet:                      @green;                     //@base16-color-base0B;
-@syntax-color-string:                       @green;                     //@base16-color-base0B;
+@syntax-color-class:                        @syntax-cursor-color;                    //@base16-color-base0A;
+@syntax-color-keyword:                      @syntax-cursor-color;                    //@base16-color-base0E;
+@syntax-color-tag:                          @syntax-cursor-color;                       //@base16-color-base08;
+@syntax-color-attribute:                    @syntax-cursor-color;                    //@base16-color-base09;
+@syntax-color-import:                       @syntax-cursor-color;                    //@base16-color-base0E;
+@syntax-color-snippet:                      @syntax-cursor-color;                     //@base16-color-base0B;
+@syntax-color-string:                       @syntax-cursor-color;                     //@base16-color-base0B;

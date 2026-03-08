@@ -1,45 +1,7 @@
-@import 'colors';
+@base2tone-scheme: 'evening';
+@base2tone-style: 'dark';
+@base2tone-contrastGutter: true;
 
-// General colors
-@syntax-text-color:                         @very-light-gray;           //@base16-color-base05
-@syntax-cursor-color:                       @white;                     //@base16-color-base07
-@syntax-selection-color:                    @dark-gray;                 //@base16-color-base02
-@syntax-selection-flash-color:              @very-light-gray;           //@base16-color-base05
-@syntax-background-color:                   @black;                     //@base16-color-base00
-
-// Guide colors
-@syntax-wrap-guide-color:                   @dark-gray;                 //@base16-color-base02
-@syntax-indent-guide-color:                 @dark-gray;                 //@base16-color-base02
-@syntax-invisible-character-color:          @dark-gray;                 //@base16-color-base02
-
-// For find and replace markers
-@syntax-result-marker-color:                @gray;                      //@base16-color-base03
-@syntax-result-marker-color-selected:       @white;                     //@base16-color-base07
-
-// Gutter colors
-@syntax-gutter-text-color:                  @light-gray;                //@base16-color-base04
-@syntax-gutter-text-color-selected:         @almost-white;              //@base16-color-base06
-@syntax-gutter-background-color:            if(@base16-contrastGutter, @very-dark-gray, @syntax-background-color);            //@base16-color-base01
-@syntax-gutter-background-color-selected:   @syntax-selection-color;
-
-// For git diff info. i.e. in the gutter
-@syntax-color-renamed:                      @blue;                      //@base16-color-base0D
-@syntax-color-added:                        @green;                     //@base16-color-base0B
-@syntax-color-modified:                     @purple;                    //@base16-color-base0E
-@syntax-color-removed:                      @red;                       //@base16-color-base08
-
-// For language entity colors
-@syntax-color-variable:                     @red;                       //@base16-color-base08
-@syntax-color-comment:                      @gray;                      //@base16-color-base03
-@syntax-color-constant:                     @orange;                    //@base16-color-base09
-@syntax-color-property:                     @syntax-text-color;
-@syntax-color-value:                        @green;                     //@base16-color-base0B
-@syntax-color-function:                     @blue;                      //@base16-color-base0D
-@syntax-color-method:                       @syntax-color-function;
-@syntax-color-class:                        @yellow;                    //@base16-color-base0A
-@syntax-color-keyword:                      @purple;                    //@base16-color-base0E
-@syntax-color-tag:                          @syntax-color-variable;
-@syntax-color-attribute:                    @syntax-color-constant;
-@syntax-color-import:                       @syntax-color-keyword;
-@syntax-color-snippet:                      @green;                     //@base16-color-base0B
-@syntax-color-string:                       @green;                     //@base16-color-base0B
+@import "schemes/@{base2tone-scheme}";
+@import "@{base2tone-style}/syntax";
+@import "@{base2tone-style}/syntax-variables";
