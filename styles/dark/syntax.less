@@ -1,622 +1,623 @@
 // scheme  Dark
 //Converted from https://raw.githubusercontent.com/atelierbram/Base2Tone-sublime-text/refs/heads/master/db/templates/dark.ejs
+//Original Author: Atelierbram - adapted from: Simurai (https://github.com/simurai/duotone-dark-syntax/)
 
-//Block Cursor
+//Block Cursor 
 .syntax--block_cursor {
-  color: @base2tone-color-baseA0;   //@base2tone-color-baseA0
-  background-color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
+  color: @base2tone-color-baseA0;
+  background-color: @base2tone-color-baseD2;
 }
 
-//Comments
+//Comments 
 
 .syntax--comment {
-  color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+  color: @syntax-color-comment;
 
-  //Comments
+  //Comments 
   &.syntax--block.syntax--html {
-    color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+    color: @syntax-color-comment;
   }
   &.syntax--line.syntax--double-slash {
-
-    //Comments
+  
+    //Comments 
     &.syntax--js {
-      color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+      color: @syntax-color-comment;
     }
-
-    //Comments
+  
+    //Comments 
     &.syntax--php {
-      color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+      color: @syntax-color-comment;
     }
   }
 }
 
-//Constants
+//Constants 
 
 .syntax--constant {
-  color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
+  color: @syntax-color-constant;
 
-  //Support
+  //Support 
   &.syntax--character {
-    color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
-
-    //Escape Characters
+    color: @base2tone-color-baseD7;
+  
+    //Escape Characters 
     &.syntax--escape {
-      color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
+      color: @base2tone-color-baseD7;
     }
   }
 
-  //Support
+  //Support 
   &.syntax--language {
-    color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
+    color: @base2tone-color-baseD7;
   }
 
-  //Integers
+  //Integers 
   &.syntax--numeric {
-    color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
+    color: @base2tone-color-baseD7;
   }
 
-  //Support
+  //Support 
   &.syntax--other {
-    color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
-
-    //Colors
+    color: @base2tone-color-baseD7;
+  
+    //Colors 
     &.syntax--color {
-      color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
+      color: @base2tone-color-baseD7;
     }
-
-    //Strings, Inherited Class
+  
+    //Strings, Inherited Class 
     &.syntax--symbol {
-      color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+      color: @syntax-color-string;
     }
   }
 }
 
 .syntax--entity {
   &.syntax--name {
-
-    //Classes
+  
+    //Classes 
     &.syntax--class {
-      color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+      color: @syntax-color-class;
     }
-
-    //Functions
+  
+    //Functions 
     &.syntax--function {
-      color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+      color: @syntax-color-function;
     }
-
-    //Headings
+  
+    //Headings 
     &.syntax--section {
       font-weight: normal;
       font-style: normal;
-      color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+      color: @base2tone-color-baseB7;
     }
-
-    //Tags
+  
+    //Tags 
     &.syntax--tag {
-      color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
-
-      //Functions
+      color: @syntax-color-tag;
+    
+      //Functions 
       &.syntax--block.syntax--any.syntax--html {
-        color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+        color: @syntax-color-function;
       }
-
-      //Functions
+    
+      //Functions 
       &.syntax--css {
-        color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+        color: @syntax-color-function;
       }
-
-      //Comments
+    
+      //Comments 
       &.syntax--doctype.syntax--html {
-        color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+        color: @syntax-color-comment;
       }
-
-      //Functions
+    
+      //Functions 
       &.syntax--other.syntax--html {
-        color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+        color: @syntax-color-function;
       }
-
-      //Functions
+    
+      //Functions 
       &.syntax--structure.syntax--any.syntax--html {
-        color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+        color: @syntax-color-function;
       }
-
-      //Selector
+    
+      //Selector 
       &.syntax--wildcard.syntax--css {
-        color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+        color: @base2tone-color-baseB7;
       }
     }
-
-    //Classes
+  
+    //Classes 
     &.syntax--type.syntax--class {
-      color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+      color: @syntax-color-class;
     }
   }
   &.syntax--other {
-
-    //Functions
+  
+    //Functions 
     &.syntax--attribute-name {
-      color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
-
-      //Selector
+      color: @syntax-color-function;
+    
+      //Selector 
       &.syntax--class.syntax--css {
-        color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+        color: @base2tone-color-baseB7;
       }
-
-      //Attributes
+    
+      //Attributes 
       &.syntax--html {
-        color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+        color: @syntax-color-attribute;
       }
-
-      //Attribute IDs
+    
+      //Attribute IDs 
       &.syntax--id {
-        color: @base2tone-color-baseD5;   //@base2tone-color-baseD5
+        color: @base2tone-color-baseD5;
       }
     }
-
-    //Classes
+  
+    //Classes 
     &.syntax--inherited-class {
-      color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+      color: @syntax-color-class;
     }
   }
 }
 
 .syntax--invalid {
 
-  //Broken
+  //Broken 
   &.syntax--broken {
-    background-color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
-    color: @base2tone-color-baseA0;   //@base2tone-color-baseA0
+    background-color: @base2tone-color-baseD2;
+    color: @base2tone-color-baseA0;
   }
 
-  //Deprecated
+  //Deprecated 
   &.syntax--deprecated {
-    background-color: @base2tone-color-baseB1;   //@base2tone-color-baseB1
-    color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+    background-color: @base2tone-color-baseB1;
+    color: @base2tone-color-baseB7;
   }
 
-  //Illegal
+  //Illegal 
   &.syntax--illegal {
-    background-color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
-    color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+    background-color: @base2tone-color-baseB0;
+    color: @base2tone-color-baseB7;
   }
 
-  //Unimplemented
+  //Unimplemented 
   &.syntax--unimplemented {
-    background-color: @base2tone-color-baseA3;   //@base2tone-color-baseA3
-    color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+    background-color: @base2tone-color-baseA3;
+    color: @base2tone-color-baseB7;
   }
 }
 
-//Keywords
+//Keywords 
 
 .syntax--keyword {
-  color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
+  color: @syntax-color-keyword;
 
-  //Operators
+  //Operators 
   &.syntax--control {
-    color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
-
-    //Functions
+    color: @base2tone-color-baseD2;
+  
+    //Functions 
     &.syntax--at-rule {
-      color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+      color: @syntax-color-function;
     }
   }
 
-  //Operators
+  //Operators 
   &.syntax--operator {
-    color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
-
-    //Selector
+    color: @base2tone-color-baseD2;
+  
+    //Selector 
     &.syntax--sass {
-      color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+      color: @base2tone-color-baseB7;
     }
   }
 
-  //Units
+  //Units 
   &.syntax--other {
-    color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
-
-    //Methods
+    color: @base2tone-color-baseD2;
+  
+    //Methods 
     &.syntax--special-method {
-      color: @base2tone-color-baseD5;   //@base2tone-color-baseD5
+      color: @syntax-color-method;
     }
   }
 }
 
 .syntax--markup {
 
-  //Bold
+  //Bold 
   &.syntax--bold {
     font-weight: bold;
-    color: @base2tone-color-baseD4;   //@base2tone-color-baseD4
+    color: @base2tone-color-baseD4;
   }
 
-  //Changed
+  //Changed 
   &.syntax--changed {
-    color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
+    color: @base2tone-color-baseB2;
   }
 
-  //Deleted
+  //Deleted 
   &.syntax--deleted {
-    color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
+    color: @base2tone-color-baseB0;
   }
 
-  //Headings
+  //Headings 
   &.syntax--heading .syntax--punctuation.syntax--definition.syntax--heading {
     font-weight: normal;
     font-style: normal;
-    color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+    color: @base2tone-color-baseB7;
   }
 
-  //Inserted
+  //Inserted 
   &.syntax--inserted {
-    color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+    color: @base2tone-color-baseC0;
   }
 
-  //Italic
+  //Italic 
   &.syntax--italic {
     font-style: italic;
-    color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
+    color: @base2tone-color-baseB2;
   }
 
-  //Lists
+  //Lists 
   &.syntax--list {
-    color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
+    color: @base2tone-color-baseB0;
   }
 
-  //Quotes
+  //Quotes 
   &.syntax--quote {
-    color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
+    color: @base2tone-color-baseD2;
   }
 
-  //Code
+  //Code 
   &.syntax--raw.syntax--inline {
-    color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+    color: @base2tone-color-baseC0;
   }
 }
 
 .syntax--meta {
   &.syntax--brace {
-
-    //Punctuation
+  
+    //Punctuation 
     &.syntax--curly.syntax--js {
-      color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+      color: @base2tone-color-baseC0;
     }
-
-    //Comments
+  
+    //Comments 
     &.syntax--round.syntax--js {
-      color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+      color: @syntax-color-comment;
     }
   }
 
-  //Classes
+  //Classes 
   &.syntax--class {
-    color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+    color: @syntax-color-class;
   }
 
-  //Functions
+  //Functions 
   &.syntax--function-call {
-    color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+    color: @syntax-color-function;
   }
 
-  //Link Url
+  //Link Url 
   &.syntax--link {
-    color: @base2tone-color-baseD2;   //@base2tone-color-baseD2
+    color: @base2tone-color-baseD2;
   }
 
-  //Functions
+  //Functions 
   &.syntax--require {
-    color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+    color: @syntax-color-function;
   }
 
-  //Selector
+  //Selector 
   &.syntax--selector {
-    color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
-
-    //Selector
+    color: @base2tone-color-baseB7;
+  
+    //Selector 
     &.syntax--css {
-      color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+      color: @base2tone-color-baseB7;
     }
   }
 
-  //Separator
+  //Separator 
   &.syntax--separator {
-    background-color: @base2tone-color-baseA2;   //@base2tone-color-baseA2
-    color: @base2tone-color-baseB3;   //@base2tone-color-baseB3
+    background-color: @base2tone-color-baseA2;
+    color: @base2tone-color-baseB3;
   }
   &.syntax--tag {
-
-    //Functions
+  
+    //Functions 
     &.syntax--block.syntax--any.syntax--html {
-      color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+      color: @syntax-color-function;
     }
       &.syntax--sgml {
-
-      //Comments
+    
+      //Comments 
       &.syntax--doctype.syntax--html {
-        color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+        color: @syntax-color-comment;
       }
-
-      //Comments
+    
+      //Comments 
       &.syntax--html {
-        color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+        color: @syntax-color-comment;
       }
     }
   }
 }
 
-//Comments
+//Comments 
 
 .syntax--punctuation {
-  color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+  color: @syntax-color-comment;
   &.syntax--definition {
-
-    //Punctuation
+  
+    //Punctuation 
     &.syntax--array {
-      color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+      color: @base2tone-color-baseC0;
     }
-
-    //Bold
+  
+    //Bold 
     &.syntax--bold {
       font-weight: bold;
-      color: @base2tone-color-baseD4;   //@base2tone-color-baseD4
+      color: @base2tone-color-baseD4;
     }
-
-    //Comments
+  
+    //Comments 
     &.syntax--comment {
-      color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
-
-      //Comments
+      color: @syntax-color-comment;
+    
+      //Comments 
       &.syntax--js {
-        color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+        color: @syntax-color-comment;
       }
-
-      //Comments
+    
+      //Comments 
       &.syntax--php {
-        color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+        color: @syntax-color-comment;
       }
     }
-
-    //Attribute IDs
+  
+    //Attribute IDs 
     &.syntax--entity {
-      color: @base2tone-color-baseD5;   //@base2tone-color-baseD5
-
-      //Comments
+      color: @base2tone-color-baseD5;
+    
+      //Comments 
       &.syntax--css {
-        color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+        color: @syntax-color-comment;
       }
     }
-
-    //Italic
+  
+    //Italic 
     &.syntax--italic {
       font-style: italic;
-      color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
+      color: @base2tone-color-baseB2;
     }
-
-    //Punctuation
+  
+    //Punctuation 
     &.syntax--parameters {
-      color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+      color: @base2tone-color-baseC0;
     }
-
-    //Punctuation
+  
+    //Punctuation 
     &.syntax--string {
-      color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
-
-      //Link Text
+      color: @base2tone-color-baseC0;
+    
+      //Link Text 
       &.syntax--end.syntax--markdown {
-        color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
+        color: @base2tone-color-baseB0;
       }
     }
-
-    //Punctuation
+  
+    //Punctuation 
     &.syntax--variable {
-      color: @base2tone-color-baseC0;   //@base2tone-color-baseC0
+      color: @base2tone-color-baseC0;
     }
   }
 
-  //Embedded
+  //Embedded 
   &.syntax--section.syntax--embedded {
-    color: @base2tone-color-baseB1;   //@base2tone-color-baseB1
-
-    //Comments
+    color: @base2tone-color-baseB1;
+  
+    //Comments 
     &.syntax--begin.syntax--php {
-      color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+      color: @syntax-color-comment;
     }
   }
 }
 
 .syntax--source {
   &.syntax--java .syntax--meta.syntax--class.syntax--java .syntax--meta {
-
-    //Java Class Body
+  
+    //Java Class Body 
     &.syntax--class.syntax--body.syntax--java {
-      color: @base2tone-color-baseC7;   //@base2tone-color-baseC7
+      color: @base2tone-color-baseC7;
     }
-
-    //Java Source
+  
+    //Java Source 
     &.syntax--method.syntax--java {
-      color: @base2tone-color-baseC7;   //@base2tone-color-baseC7
+      color: @base2tone-color-baseC7;
     }
   }
 
-  //Strings, Inherited Class
+  //Strings, Inherited Class 
   &.syntax--js {
-    color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+    color: @syntax-color-string;
       .syntax--meta {
           &.syntax--block.syntax--js {
-
-        //Javascript: Block Variables in Function Calls
+      
+        //Javascript: Block Variables in Function Calls 
         .syntax--meta.syntax--function-call.syntax--method.syntax--js .syntax--variable.syntax--other.syntax--readwrite.syntax--js {
-          color: @base2tone-color-baseC7;   //@base2tone-color-baseC7
+          color: @base2tone-color-baseC7;
         }
               .syntax--variable.syntax--other {
-
-          //Javascript: Block Variables
+        
+          //Javascript: Block Variables 
           &.syntax--object.syntax--js {
-            color: @base2tone-color-baseC7;   //@base2tone-color-baseC7
+            color: @base2tone-color-baseC7;
           }
-
-          //Javascript: New Block Variables
+        
+          //Javascript: New Block Variables 
           &.syntax--readwrite.syntax--js {
-            color: @base2tone-color-baseD3;   //@base2tone-color-baseD3
+            color: @base2tone-color-baseD3;
           }
         }
       }
-
-      //Javascript: Function Arguments
+    
+      //Javascript: Function Arguments 
       &.syntax--function.syntax--js .syntax--variable.syntax--parameter.syntax--function.syntax--js {
-        color: @base2tone-color-baseD3;   //@base2tone-color-baseD3
+        color: @base2tone-color-baseD3;
       }
           &.syntax--function-call.syntax--method.syntax--js .syntax--variable {
-
-        //Javascript: Function Calls
+      
+        //Javascript: Function Calls 
         &.syntax--function.syntax--js {
-          color: @base2tone-color-baseC7;   //@base2tone-color-baseC7
+          color: @base2tone-color-baseC7;
         }
-
-        //Javascript: Variables in Function Calls
+      
+        //Javascript: Variables in Function Calls 
         &.syntax--other.syntax--readwrite.syntax--js {
-          color: @base2tone-color-baseD3;   //@base2tone-color-baseD3
+          color: @base2tone-color-baseD3;
         }
       }
-
-      //Javascript: Properties
+    
+      //Javascript: Properties 
       &.syntax--property.syntax--object.syntax--js .syntax--entity.syntax--name.syntax--function.syntax--js {
-        color: @base2tone-color-baseC7;   //@base2tone-color-baseC7
+        color: @base2tone-color-baseC7;
       }
     }
-
-    //Javascript: Prototypes
+  
+    //Javascript: Prototypes 
     .syntax--support.syntax--constant.syntax--prototype.syntax--js {
-      color: @base2tone-color-baseC7;   //@base2tone-color-baseC7
+      color: @base2tone-color-baseC7;
     }
       .syntax--variable.syntax--other {
-
-      //Javascript: Variables
+    
+      //Javascript: Variables 
       &.syntax--object.syntax--js {
-        color: @base2tone-color-baseC7;   //@base2tone-color-baseC7
+        color: @base2tone-color-baseC7;
       }
-
-      //Javascript: New Variables
+    
+      //Javascript: New Variables 
       &.syntax--readwrite.syntax--js {
-        color: @base2tone-color-baseD3;   //@base2tone-color-baseD3
+        color: @base2tone-color-baseD3;
       }
     }
   }
 
-  //Comments
+  //Comments 
   &.syntax--php {
-    color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
-
-    //Comments
+    color: @syntax-color-comment;
+  
+    //Comments 
     &.syntax--embedded.syntax--block.syntax--html {
-      color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+      color: @syntax-color-comment;
     }
   }
 }
 
-//Storage
+//Storage 
 
 .syntax--storage {
-  color: @base2tone-color-baseB2;   //@base2tone-color-baseB2
+  color: @base2tone-color-baseB2;
 
-  //Support
+  //Support 
   &.syntax--type {
-    color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
+    color: @base2tone-color-baseD7;
   }
 }
 
-//Strings, Inherited Class
+//Strings, Inherited Class 
 
 .syntax--string {
-  color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
+  color: @syntax-color-string;
 
-  //Link Text
+  //Link Text 
   &.syntax--other.syntax--link {
-    color: @base2tone-color-baseB0;   //@base2tone-color-baseB0
+    color: @base2tone-color-baseB0;
   }
   &.syntax--quoted {
-
-    //Support
+  
+    //Support 
     &.syntax--double {
-      color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
+      color: @base2tone-color-baseD7;
     }
-
-    //Support
+  
+    //Support 
     &.syntax--single {
-      color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
+      color: @base2tone-color-baseD7;
     }
   }
 
-  //Regular Expressions
+  //Regular Expressions 
   &.syntax--regexp {
-    color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
+    color: @base2tone-color-baseD7;
   }
 }
 
 .syntax--support {
 
-  //Operators
+  //Operators 
   &.syntax--class {
-    color: @base2tone-color-baseB3;   //@base2tone-color-baseB3
+    color: @base2tone-color-baseB3;
   }
 
-  //Support
+  //Support 
   &.syntax--constant {
-    color: @base2tone-color-baseD7;   //@base2tone-color-baseD7
+    color: @base2tone-color-baseD7;
   }
 
-  //Operators
+  //Operators 
   &.syntax--function {
-    color: @base2tone-color-baseB3;   //@base2tone-color-baseB3
-
-    //Functions
+    color: @base2tone-color-baseB3;
+  
+    //Functions 
     &.syntax--any-method {
-      color: @base2tone-color-baseB7;   //@base2tone-color-baseB7
+      color: @syntax-color-function;
     }
-
-    //Operators
+  
+    //Operators 
     &.syntax--construct {
-      color: @base2tone-color-baseB3;   //@base2tone-color-baseB3
+      color: @base2tone-color-baseB3;
     }
   }
 
-  //Operators
+  //Operators 
   &.syntax--type.syntax--property-name.syntax--css {
-    color: @base2tone-color-baseB3;   //@base2tone-color-baseB3
+    color: @base2tone-color-baseB3;
   }
 }
 
 .syntax--text.syntax--html {
 
-  //Text
+  //Text 
   &.syntax--basic {
-    color: @base2tone-color-baseB3;   //@base2tone-color-baseB3
+    color: @base2tone-color-baseB3;
   }
 
-  //Comments
+  //Comments 
   &.syntax--mt {
-    color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+    color: @syntax-color-comment;
   }
 }
 
-//Variables
+//Variables 
 
 .syntax--variable {
-  color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+  color: @syntax-color-variable;
 
-  //Embedded
+  //Embedded 
   &.syntax--interpolation {
-    color: @base2tone-color-baseB1;   //@base2tone-color-baseB1
+    color: @base2tone-color-baseB1;
   }
 
-  //Variables
+  //Variables 
   &.syntax--other {
-    color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+    color: @syntax-color-variable;
   }
 
-  //Variables
+  //Variables 
   &.syntax--parameter.syntax--function {
-    color: @base2tone-color-baseB5;   //@base2tone-color-baseB5
+    color: @syntax-color-variable;
   }
 }

@@ -1,46 +1,47 @@
 // scheme  Dark
 //Converted from https://raw.githubusercontent.com/atelierbram/Base2Tone-sublime-text/refs/heads/master/db/templates/dark-alt.ejs
+//Original Author: Atelierbram - adapted from: Simurai (https://github.com/simurai/duotone-dark-syntax/)
 
 // General colors
-@syntax-text-color:                         @base2tone-color-baseA3;   //@base2tone-color-baseA3;
-@syntax-cursor-color:                       @base2tone-color-baseD2;   //@base2tone-color-baseD2;
-@syntax-selection-color:                    @base2tone-color-baseA1;   //@base2tone-color-baseA1;
-@syntax-selection-flash-color:              @base2tone-color-baseA3;   //@base2tone-color-baseA3;
-@syntax-background-color:                   @base2tone-color-baseA0;   //@base2tone-color-baseA0;
+@syntax-text-color:                         @base2tone-color-baseA3;
+@syntax-cursor-color:                       @base2tone-color-baseD2;
+@syntax-selection-color:                    @base2tone-color-baseA1;
+@syntax-selection-flash-color:              @base2tone-color-baseA3;
+@syntax-background-color:                   @base2tone-color-baseA0;
 
 // Guide colors
-@syntax-wrap-guide-color:                   @base2tone-color-baseA1;   //@base2tone-color-baseA1;
-@syntax-indent-guide-color:                 @base2tone-color-baseA1;   //@base2tone-color-baseA1;
-@syntax-invisible-character-color:          @base2tone-color-baseA1;   //@base2tone-color-baseA1;
+@syntax-wrap-guide-color:                   @base2tone-color-baseA1;
+@syntax-indent-guide-color:                 @base2tone-color-baseA1;
+@syntax-invisible-character-color:          @base2tone-color-baseA1;
 
 // For find and replace markers
-@syntax-result-marker-color:                @base2tone-color-baseA1;   //@base2tone-color-baseA1;
-@syntax-result-marker-color-selected:       @base2tone-color-baseA3;   //@base2tone-color-baseA3;
+@syntax-result-marker-color:                @base2tone-color-baseA1;
+@syntax-result-marker-color-selected:       @base2tone-color-baseA3;
 
 // Gutter colors
-@syntax-gutter-text-color:                  @base2tone-color-baseA2;   //@base2tone-color-baseA2;
-@syntax-gutter-text-color-selected:         @base2tone-color-baseA2;   //@base2tone-color-baseA2;
-@syntax-gutter-background-color:            @base2tone-color-baseA1;   //@base2tone-color-baseA1;
-@syntax-gutter-background-color-selected:   @base2tone-color-baseA1;   //@base2tone-color-baseA1;
+@syntax-gutter-text-color:                  @base2tone-color-baseA2;
+@syntax-gutter-text-color-selected:         @base2tone-color-baseA2;
+@syntax-gutter-background-color:            @base2tone-color-baseA1;
+@syntax-gutter-background-color-selected:   @base2tone-color-baseA1;
 
 // For git diff info. i.e. in the gutter
-@syntax-color-renamed:                      @syntax-cursor-color;                      //@base16-color-base0D;
-@syntax-color-added:                        @syntax-cursor-color;                     //@base16-color-base0B;
-@syntax-color-modified:                     @syntax-cursor-color;                    //@base16-color-base09;
-@syntax-color-removed:                      @syntax-cursor-color;                       //@base16-color-base08;
+@syntax-color-renamed:                      hsl(hue(blue), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));
+@syntax-color-added:                        hsl(hue(green), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));
+@syntax-color-modified:                     hsl(hue(orange), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));
+@syntax-color-removed:                      hsl(hue(red), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));
 
 // For language entity colors
-@syntax-color-variable:                     @syntax-cursor-color;                       //@base16-color-base08;
-@syntax-color-comment:                      @syntax-cursor-color;                     //@base16-color-base0B;
-@syntax-color-constant:                     @syntax-cursor-color;                    //@base16-color-base09;
+@syntax-color-variable:                     @base2tone-color-baseB5;
+@syntax-color-comment:                      @base2tone-color-baseA3;
+@syntax-color-constant:                     @base2tone-color-baseD2;
 @syntax-color-property:                     @syntax-text-color;
-@syntax-color-value:                        @syntax-cursor-color;                     //@base16-color-base0B;
-@syntax-color-function:                     @syntax-cursor-color;                      //@base16-color-base0D;
-@syntax-color-method:                       @syntax-color-function;
-@syntax-color-class:                        @syntax-cursor-color;                    //@base16-color-base0A;
-@syntax-color-keyword:                      @syntax-cursor-color;                    //@base16-color-base0E;
-@syntax-color-tag:                          @syntax-cursor-color;                       //@base16-color-base08;
-@syntax-color-attribute:                    @syntax-cursor-color;                    //@base16-color-base09;
-@syntax-color-import:                       @syntax-cursor-color;                    //@base16-color-base0E;
-@syntax-color-snippet:                      @syntax-cursor-color;                     //@base16-color-base0B;
-@syntax-color-string:                       @syntax-cursor-color;                     //@base16-color-base0B;
+@syntax-color-value:                        @base2tone-color-baseD2;
+@syntax-color-function:                     @base2tone-color-baseB7;
+@syntax-color-method:                       @base2tone-color-baseD5;
+@syntax-color-class:                        @base2tone-color-baseB7;
+@syntax-color-keyword:                      @base2tone-color-baseB2;
+@syntax-color-tag:                          @base2tone-color-baseB7;
+@syntax-color-attribute:                    @base2tone-color-baseB5;
+@syntax-color-string:                       @base2tone-color-baseB5;
+@syntax-color-import:                       @syntax-color-keyword;
+@syntax-color-snippet:                      @syntax-color-string;

@@ -1,9 +1,9 @@
 from datetime import datetime, timezone
-from deepmerge import always_merger
 from http import HTTPStatus
 from pathlib import Path, PurePath
 from typing import NoReturn
 
+import copy
 import json
 import plistlib
 import pprint
@@ -21,7 +21,7 @@ template_urls = [
 templates_dir = "./templates"
 styles_dir = "../styles"
 
-settings_path = "../lib/base16bundle_settings.json"
+settings_path = "../lib/base2tone_bundle_settings.json"
 
 MAX_AGE = 30 #days
 
@@ -63,6 +63,22 @@ colors_dict = {
     "base2tone-color-baseD7": "D7",
 }
 base2tone_dict = {v: k for k, v in colors_dict.items()}
+
+variables_dict ={
+    "Variables":                "@syntax-color-variable",
+    "Comments":                 "@syntax-color-comment",
+    "Constants":                "@syntax-color-constant",
+
+    "Values":                   "@syntax-color-value",
+    "Functions":                "@syntax-color-function",
+    "Methods":                  "@syntax-color-method",
+    "Classes":                  "@syntax-color-class",
+    "Keywords":                 "@syntax-color-keyword",
+    "Tags":                     "@syntax-color-tag",
+    "Attributes":               "@syntax-color-attribute",
+
+    "Strings, Inherited Class": "@syntax-color-string",
+}
 
 lambda i: i.split("_")[1].upper()
 
@@ -108,11 +124,23 @@ def get_template(url : str) -> dict:
     return result
 
 
+def deep_merge(old: dict, new: dict) -> dict:
+    """Recursively merges 'new' into 'old'."""
+    result = copy.deepcopy(old)
+    for k, v in new.items():
+        if k in result and isinstance(result[k], dict) and isinstance(v, dict):
+            result[k] = deep_merge(result[k], v)
+        else:
+            result[k] = copy.deepcopy(v)
+    return result
+
+
 def parse_ejs_template(theme_data: dict) -> dict:
     """Parse template data from plist."""
     result = {}
     # print("\n---\n")
     result["name"] = theme_data["name"]
+    result["author"] = theme_data["author"]
 
     gutter = {}
     for field in theme_data["gutterSettings"]:
@@ -121,61 +149,38 @@ def parse_ejs_template(theme_data: dict) -> dict:
 
     settings = {}
     rules = {}
+    syntax_vars = {}
     for i in theme_data["settings"]:
         if "scope" not in i:
             for field in i["settings"]:
                 settings[field] = less_color(i["settings"][field])
-        elif i["scope"] != "none":
-            i_settings = {}
-            for setting in i["settings"]:
-                if setting in ["foreground", "background"]:
-                    i_settings[setting] = less_color(i["settings"][setting])
-                else:
-                    i_settings[setting] = i["settings"][setting]
-            for rule in i["scope"].split(", "):
-                always_merger.merge(
-                    rules,
-                    add_rule(rule.strip(" "), i["name"], i_settings),
-                )
+        else:
+            if i["name"] in variables_dict:
+                syntax_vars[variables_dict[i["name"]]] = less_color(i["settings"]["foreground"])
+            if i["scope"] != "none":
+                i_settings = {}
+                for setting in i["settings"]:
+                    if setting == "foreground":
+                        i_settings[setting] = (
+                            variables_dict[i["name"]]
+                            if i["name"] in variables_dict
+                            else less_color(i["settings"][setting])
+                        )
+                    elif setting == "background":
+                        i_settings[setting] = less_color(i["settings"][setting])
+                    else:
+                        i_settings[setting] = i["settings"][setting]
+                for rule in i["scope"].split(", "):
+                    new_rules = add_rule(rule.strip(" "), i["name"], i_settings)
+                    rules = deep_merge(rules, new_rules)
 
-    #             print(i["name"], "\n ", len(rule.split(".")), " ", rule, "\n", i["settings"])
+    #                 print(i["name"], "\n ", rule, "\n", i["settings"], "\n", i_settings)
     #             print("\n---")
     # print("\n---\n")
 
     result["settings"] = settings
     result["rules"] = rules
-
-    return result
-
-
-def parse_mustache_template(theme_data : dict) -> dict:
-    """Parse template data from json."""
-    result = {}
-    # print("\n---\n")
-    result["name"] = theme_data["name"].strip("{").strip("}")
-
-    settings = {}
-    for i in theme_data["globals"]:
-        if "{{base" in theme_data["globals"][i]:
-            settings[i] = less_color(theme_data["globals"][i])
-    result["settings"] = settings
-
-    rules = {}
-    for i in theme_data["rules"]:
-        i_settings = {}
-        i_name = i["name"] if "name" in i else i["scope"]
-        for setting in i:
-            if setting not in ["name", "scope"]:
-                if setting in ["foreground", "background"]:
-                    i_settings[setting] = less_color(i[setting])
-                else:
-                    i_settings[setting] = i[setting]
-        for rule in i["scope"].split(", "):
-            always_merger.merge(rules, add_rule(rule, i_name, i_settings))
-    #         print(i_name, "\n ", len(rule.split(".")), " ", rule, "\n", i_settings)
-    #         print("\n---")
-    # print("\n---\n")
-    result["rules"] = rules
+    result["syntax_vars"] = syntax_vars
 
     return result
 
@@ -236,7 +241,7 @@ def less_color(text_element : str) -> str:
     color_idx = color_idx.removeprefix('base["').removesuffix('"]["hex"]')
     color_idx = color_idx.removeprefix("{{base").removesuffix("-hex}}")
 
-    return f"@{base2tone_dict[color_idx]};   //@base2tone-color-base{color_idx}"
+    return f"@{base2tone_dict[color_idx]}"
 
 
 def generate_variables(theme : dict, source : str) ->str:
@@ -245,6 +250,7 @@ def generate_variables(theme : dict, source : str) ->str:
     result = ""
     result += f"//{theme["name"]}\n"
     result += f"//Converted from {source}\n"
+    result += f"//Original Author: {theme["author"]}\n"
 
     result += "\n// General colors\n"
     text_color = theme["settings"]["foreground"]
@@ -297,26 +303,26 @@ def generate_variables(theme : dict, source : str) ->str:
     result += f"@syntax-gutter-background-color-selected:   {gutter_background_selected_color};\n"
 
     result += "\n// For git diff info. i.e. in the gutter\n"
-    result += "@syntax-color-renamed:                      @blue;                      //@base16-color-base0D;\n"
-    result += "@syntax-color-added:                        @green;                     //@base16-color-base0B;\n"
-    result += "@syntax-color-modified:                     @orange;                    //@base16-color-base09;\n"
-    result += "@syntax-color-removed:                      @red;                       //@base16-color-base08;\n"
+    result += "@syntax-color-renamed:                      hsl(hue(blue), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
+    result += "@syntax-color-added:                        hsl(hue(green), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
+    result += "@syntax-color-modified:                     hsl(hue(orange), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
+    result += "@syntax-color-removed:                      hsl(hue(red), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
 
     result += "\n// For language entity colors\n"
-    result += "@syntax-color-variable:                     @red;                       //@base16-color-base08;\n"
-    result += "@syntax-color-comment:                      @green;                     //@base16-color-base0B;\n"
-    result += "@syntax-color-constant:                     @orange;                    //@base16-color-base09;\n"
+    result += f"@syntax-color-variable:                     {theme["syntax_vars"]["@syntax-color-variable"]};\n"
+    result += f"@syntax-color-comment:                      {theme["syntax_vars"]["@syntax-color-comment"]};\n"
+    result += f"@syntax-color-constant:                     {theme["syntax_vars"]["@syntax-color-constant"]};\n"
     result += "@syntax-color-property:                     @syntax-text-color;\n"
-    result += "@syntax-color-value:                        @green;                     //@base16-color-base0B;\n"
-    result += "@syntax-color-function:                     @blue;                      //@base16-color-base0D;\n"
-    result += "@syntax-color-method:                       @syntax-color-function;\n"
-    result += "@syntax-color-class:                        @yellow;                    //@base16-color-base0A;\n"
-    result += "@syntax-color-keyword:                      @purple;                    //@base16-color-base0E;\n"
-    result += "@syntax-color-tag:                          @red;                       //@base16-color-base08;\n"
-    result += "@syntax-color-attribute:                    @orange;                    //@base16-color-base09;\n"
-    result += "@syntax-color-import:                       @purple;                    //@base16-color-base0E;\n"
-    result += "@syntax-color-snippet:                      @green;                     //@base16-color-base0B;\n"
-    result += "@syntax-color-string:                       @green;                     //@base16-color-base0B;\n"
+    result += f"@syntax-color-value:                        {theme["syntax_vars"]["@syntax-color-value"]};\n"
+    result += f"@syntax-color-function:                     {theme["syntax_vars"]["@syntax-color-function"]};\n"
+    result += f"@syntax-color-method:                       {theme["syntax_vars"]["@syntax-color-method"]};\n"
+    result += f"@syntax-color-class:                        {theme["syntax_vars"]["@syntax-color-class"]};\n"
+    result += f"@syntax-color-keyword:                      {theme["syntax_vars"]["@syntax-color-keyword"]};\n"
+    result += f"@syntax-color-tag:                          {theme["syntax_vars"]["@syntax-color-tag"]};\n"
+    result += f"@syntax-color-attribute:                    {theme["syntax_vars"]["@syntax-color-attribute"]};\n"
+    result += f"@syntax-color-string:                       {theme["syntax_vars"]["@syntax-color-string"]};\n"
+    result += "@syntax-color-import:                       @syntax-color-keyword;\n"
+    result += "@syntax-color-snippet:                      @syntax-color-string;\n"
 
     return result
 
@@ -326,7 +332,7 @@ def generate_syntax(theme : dict, source : str) ->str:
     result = ""
     result += f"//{theme["name"]}\n"
     result += f"//Converted from {source}\n"
-    result += "\n@import 'colors';\n"
+    result += f"//Original Author: {theme["author"]}\n"
 
     for rule in sorted(theme["rules"]):
         result += use_rule(theme["rules"][rule], rule, 0)
@@ -406,9 +412,9 @@ def format_setting(setting: str, value: str, indentation: int) -> str:
     """Format each css attribute."""
     result = ""
     if setting == "foreground":
-        result = f"color: {value}"
+        result = f"color: {value};"
     elif setting == "background":
-        result = f"background-color: {value}"
+        result = f"background-color: {value};"
     elif setting in ["font_style", "fontStyle"]:
         newstring = False
         if "bold" in value:
@@ -454,11 +460,13 @@ def convert_template(template_path : str) -> NoReturn:
         # pprint.pp(template_data)
         if PurePath(template_path).suffix == ".ejs":
             parsed = parse_ejs_template(template_data)
-        elif PurePath(template_path).suffix == ".mustache":
-            parsed = parse_mustache_template(template_data)
+        else:
+            print("---!!! unknown format !!!---")
         pprint.pp(parsed)
+
         theme_variables = generate_variables(parsed, template_path)
         theme_syntax = generate_syntax(parsed, template_path)
+
         # print("\nVariables:\n", theme_variables)
         # print("\nSyntax:\n", theme_syntax)
         style_name = PurePath(template_path).stem
