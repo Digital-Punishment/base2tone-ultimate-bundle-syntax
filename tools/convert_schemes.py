@@ -10,7 +10,7 @@ import re
 
 source_path = "./schemes/db/schemes"
 schemes_path = "../styles/schemes"
-settings_path = "../lib/base16bundle_settings.json"
+settings_path = "../lib/base2tone_bundle_settings.json"
 package_path = "../package.json"
 readme_path = "../README.md"
 
@@ -155,6 +155,10 @@ if __name__ == "__main__":
 
     keywords = {lower_keyword(name) for name in name_list}
     keywords.add("base2tone")
+    keywords.add("duotone")
+    keywords.add("syntax")
+    keywords.add("theme")
+
     with Path(package_path).open(mode = "r") as package_file:
         package_content = json.loads(package_file.read())
     package_content["keywords"] = sorted(keywords)

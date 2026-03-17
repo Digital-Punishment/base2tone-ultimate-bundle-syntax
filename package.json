@@ -9,6 +9,7 @@
     "cave",
     "desert",
     "drawbridge",
+    "duotone",
     "earth",
     "evening",
     "field",
@@ -25,7 +26,9 @@
     "porch",
     "sea",
     "space",
-    "suburb"
+    "suburb",
+    "syntax",
+    "theme"
   ],
   "files": [
     "!.git*",

@@ -106,8 +106,6 @@ Alternatively, the theme can be changed in the Preview Mode. Toggle the _Command
 
 ## Credits
 
-This is a fork of [Base2Tone Syntax Theme](https://packages.pulsar-edit.dev/packages/base16-syntax) by [Alchiadus](https://github.com/Alchiadus).
+This is a fork of [Base16 Syntax Theme](https://packages.pulsar-edit.dev/packages/base16-syntax) by [Alchiadus](https://github.com/Alchiadus).
 
-The original [Base2Tone Theme](https://github.com/chriskempson/base16) is made by [Chris Kempson](http://chriskempson.com).
 
-Color schemes converted from [GitHub Repository](https://github.com/tinted-theming/schemes) maintained by [Tinted Theming](https://github.com/tinted-theming) community.
