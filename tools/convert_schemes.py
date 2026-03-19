@@ -148,10 +148,11 @@ if __name__ == "__main__":
     print(f"{len(name_list)} schemes in package")
 
     with Path(settings_path).open(mode = "r") as settings_file:
-        settings_content = json.loads(settings_file.read())
+        settings_content = json.load(settings_file)
     settings_content["config"]["scheme"]["enum"] = sorted(name_list)
     with Path(settings_path).open(mode = "w") as settings_file:
         json.dump(settings_content, settings_file, indent = 2)
+        settings_file.write("\n")
 
     keywords = {lower_keyword(name) for name in name_list}
     keywords.add("base2tone")
@@ -160,10 +161,11 @@ if __name__ == "__main__":
     keywords.add("theme")
 
     with Path(package_path).open(mode = "r") as package_file:
-        package_content = json.loads(package_file.read())
+        package_content = json.load(package_file)
     package_content["keywords"] = sorted(keywords)
     with Path(package_path).open(mode = "w") as package_file:
         json.dump(package_content, package_file, indent = 2)
+        package_file.write("\n")
 
     with Path(readme_path).open(mode = "w") as readme_file:
         readme_file.write(generate_readme(name_list))

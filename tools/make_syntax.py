@@ -116,8 +116,6 @@ def get_template(url : str) -> dict:
         with Path.open(template_path, "r") as template_file:
             if PurePath(template_path).suffix == ".ejs":
                 result = plistlib.loads(template_file.read())
-            elif PurePath(template_path).suffix == ".mustache":
-                result = json.loads(template_file.read())
             else:
                 result = ""
 
@@ -478,7 +476,8 @@ def convert_template(template_path : str) -> NoReturn:
 if __name__ == "__main__":
     style_list = [convert_template(style).replace("-", " ").title() for style in template_urls]
     with Path(settings_path).open(mode = "r") as settings_file:
-        settings_content = json.loads(settings_file.read())
+        settings_content = json.load(settings_file)
     settings_content["config"]["style"]["enum"] = sorted(style_list)
     with Path(settings_path).open(mode = "w") as settings_file:
         json.dump(settings_content, settings_file, indent = 2)
+        settings_file.write("\n")

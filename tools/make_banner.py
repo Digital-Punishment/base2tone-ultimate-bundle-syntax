@@ -46,9 +46,9 @@ shadows = Image.new("RGBA", banner_size, (0, 0, 0, 0))
 draw = ImageDraw.Draw(shadows)
 
 with Path(settings_path).open(mode = "r") as settings_file:
-    settings_content = json.loads(settings_file.read())
+    settings_content = json.load(settings_file)
 with Path(package_path).open(mode = "r") as package_file:
-    package_content = json.loads(package_file.read())
+    package_content = json.load(package_file)
 
 text_title = package_content["name"].removesuffix("-syntax").replace("-", " ").title()
 text_version = f"Version: {package_content["version"]}"
