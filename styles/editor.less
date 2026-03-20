@@ -53,8 +53,20 @@ atom-text-editor {
   }
 
   .bracket-matcher .region {
-    border-color: @syntax-result-marker-color;
+    border-bottom: 1px solid @syntax-cursor-color;
+    background-color: @syntax-indent-guide-color;
   }
+
+  ::-webkit-scrollbar-track,
+  ::-webkit-scrollbar-corner {
+    background: @syntax-background-color !important;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: @syntax-selection-color !important;
+    border-radius: 16px !important;
+  }
+
 }
 
 atom-text-editor[mini] .scroll-view {

@@ -244,73 +244,135 @@ def less_color(text_element : str) -> str:
 
 def generate_variables(theme : dict, source : str) ->str:
     """Generate "syntax-variables.less" from parsed theme."""
-    # useless as it is, but is a good base/reference for a syntax-variables.less file.
-    result = ""
+    #default colors
+    text_color = theme["settings"]["foreground"]
+    cursor_color = theme["settings"]["caret"]
+    selection_color = theme["settings"]["selection"]
+    selection_flash_color = theme["settings"]["foreground"]
+    background_color = theme["settings"]["background"]
+
+    wrap_guide_color = (
+        theme["settings"]["guide"]
+        if "guide" in theme["settings"]
+        else theme["settings"]["selection"]
+    )
+    indent_guide_color = (
+        theme["settings"]["guide"]
+        if "guide" in theme["settings"]
+        else theme["settings"]["selection"]
+    )
+    invisible_character_color = theme["settings"]["invisibles"]
+
+    result_marker_color = (
+        theme["settings"]["find_highlight"]
+        if "find_highlight" in theme["settings"]
+        else theme["settings"]["selection"]
+    )
+    result_marker_selected_color = theme["settings"]["foreground"]
+
+    gutter_text_color = (
+        theme["gutter"]["foreground"]
+        if "gutter" in theme
+        else theme["settings"]["gutter_foreground"]
+    )
+    gutter_text_selected_color = (
+        theme["gutter"]["selectionForeground"]
+        if "gutter" in theme
+        else theme["settings"]["caret"]
+    )
+    gutter_background_color = (
+        theme["gutter"]["background"]
+        if "gutter" in theme
+        else theme["settings"]["gutter"]
+    )
+    gutter_background_selected_color = (
+        theme["gutter"]["selectionBackground"]
+        if "gutter" in theme
+        else theme["settings"]["foreground"]
+    )
+
+    #color tweaks for dark style
+    if "dark" in source:
+        background_color =                  f"@{base2tone_dict["A0"]}"
+        indent_guide_color =                f"@{base2tone_dict["A1"]}"
+        selection_color =                   f"@{base2tone_dict["A2"]}"
+        #A3
+        gutter_text_color =                 f"@{base2tone_dict["A4"]}"
+        text_color =                        f"@{base2tone_dict["A5"]}"
+        #A6
+        gutter_text_selected_color =        f"@{base2tone_dict["A7"]}"
+
+        selection_flash_color =              "@syntax-text-color"
+
+        wrap_guide_color =                   "@syntax-selection-color"
+        invisible_character_color =          "@syntax-indent-guide-color"
+
+        result_marker_color =                "@syntax-selection-color"
+        result_marker_selected_color =       "@syntax-text-color"
+
+        gutter_background_color =            "@syntax-indent-guide-color"
+        gutter_background_selected_color =   "@syntax-gutter-background-color"
+
+    #color tweaks for light style
+    if "light" in source:
+        background_color =                  f"@{base2tone_dict["C7"]}"
+        indent_guide_color =                f"@{base2tone_dict["C6"]}"
+        selection_color =                   f"@{base2tone_dict["C5"]}"
+        #C4
+        gutter_text_color =                 f"@{base2tone_dict["C3"]}"
+        text_color =                        f"@{base2tone_dict["C2"]}"
+        #C1
+        gutter_text_selected_color =        f"@{base2tone_dict["C0"]}"
+
+        selection_flash_color =              "@syntax-text-color"
+
+        wrap_guide_color =                   "@syntax-selection-color"
+        invisible_character_color =          "@syntax-indent-guide-color"
+
+        result_marker_color =                "@syntax-selection-color"
+        result_marker_selected_color =       "@syntax-text-color"
+
+        gutter_background_color =            "@syntax-indent-guide-color"
+        gutter_background_selected_color =   "@syntax-gutter-background-color"
+
+    result =   ""
     result += f"//{theme["name"]}\n"
     result += f"//Converted from {source}\n"
     result += f"//Original Author: {theme["author"]}\n"
 
-    result += "\n// General colors\n"
-    text_color = theme["settings"]["foreground"]
+    result +=  "\n// General colors\n"
     result += f"@syntax-text-color:                         {text_color};\n"
-    cursor_color = theme["settings"]["caret"]
     result += f"@syntax-cursor-color:                       {cursor_color};\n"
-    selection_color = theme["settings"]["selection"]
     result += f"@syntax-selection-color:                    {selection_color};\n"
-    selection_flash_color = theme["settings"]["foreground"]
     result += f"@syntax-selection-flash-color:              {selection_flash_color};\n"
-    background_color = theme["settings"]["background"]
     result += f"@syntax-background-color:                   {background_color};\n"
 
-    result += "\n// Guide colors\n"
-    wrap_guide_color = theme["settings"]["guide"] \
-                       if "guide" in theme["settings"] \
-                       else theme["settings"]["selection"]
+    result +=  "\n// Guide colors\n"
     result += f"@syntax-wrap-guide-color:                   {wrap_guide_color};\n"
-    indent_guide_color = theme["settings"]["guide"] \
-                         if "guide" in theme["settings"] \
-                         else theme["settings"]["selection"]
     result += f"@syntax-indent-guide-color:                 {indent_guide_color};\n"
-    invisible_character_color = theme["settings"]["invisibles"]
     result += f"@syntax-invisible-character-color:          {invisible_character_color};\n"
 
-    result += "\n// For find and replace markers\n"
-    result_marker_color = theme["settings"]["find_highlight"] \
-                          if "find_highlight" in theme["settings"] \
-                          else theme["settings"]["selection"]
+    result +=  "\n// For find and replace markers\n"
     result += f"@syntax-result-marker-color:                {result_marker_color};\n"
-    result_marker_selected_color = theme["settings"]["foreground"]
     result += f"@syntax-result-marker-color-selected:       {result_marker_selected_color};\n"
 
-    result += "\n// Gutter colors\n"
-    gutter_text_color = theme["gutter"]["foreground"] \
-                        if "gutter" in theme \
-                        else theme["settings"]["gutter_foreground"]
+    result +=  "\n// Gutter colors\n"
     result += f"@syntax-gutter-text-color:                  {gutter_text_color};\n"
-    gutter_text_selected_color = theme["gutter"]["selectionForeground"] \
-                                 if "gutter" in theme \
-                                 else theme["settings"]["caret"]
     result += f"@syntax-gutter-text-color-selected:         {gutter_text_selected_color};\n"
-    gutter_background_color = theme["gutter"]["background"] \
-                              if "gutter" in theme \
-                              else theme["settings"]["gutter"]
-    result += f"@syntax-gutter-background-color:            {gutter_background_color};\n"
-    gutter_background_selected_color = theme["gutter"]["selectionBackground"] \
-                                       if "gutter" in theme \
-                                       else theme["settings"]["foreground"]
+    result += f"@syntax-gutter-background-color:            if(@base2tone-contrastGutter, {gutter_background_color}, @syntax-background-color);\n"
     result += f"@syntax-gutter-background-color-selected:   {gutter_background_selected_color};\n"
 
-    result += "\n// For git diff info. i.e. in the gutter\n"
-    result += "@syntax-color-renamed:                      hsl(hue(blue), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
-    result += "@syntax-color-added:                        hsl(hue(green), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
-    result += "@syntax-color-modified:                     hsl(hue(orange), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
-    result += "@syntax-color-removed:                      hsl(hue(red), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
+    result +=  "\n// For git diff info. i.e. in the gutter\n"
+    result +=  "@syntax-color-renamed:                      hsl(hue(blue), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
+    result +=  "@syntax-color-added:                        hsl(hue(green), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
+    result +=  "@syntax-color-modified:                     hsl(hue(orange), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
+    result +=  "@syntax-color-removed:                      hsl(hue(red), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
 
-    result += "\n// For language entity colors\n"
+    result +=  "\n// For language entity colors\n"
     result += f"@syntax-color-variable:                     {theme["syntax_vars"]["@syntax-color-variable"]};\n"
     result += f"@syntax-color-comment:                      {theme["syntax_vars"]["@syntax-color-comment"]};\n"
     result += f"@syntax-color-constant:                     {theme["syntax_vars"]["@syntax-color-constant"]};\n"
-    result += "@syntax-color-property:                     @syntax-text-color;\n"
+    result +=  "@syntax-color-property:                     @syntax-text-color;\n"
     result += f"@syntax-color-value:                        {theme["syntax_vars"]["@syntax-color-value"]};\n"
     result += f"@syntax-color-function:                     {theme["syntax_vars"]["@syntax-color-function"]};\n"
     result += f"@syntax-color-method:                       {theme["syntax_vars"]["@syntax-color-method"]};\n"
@@ -319,8 +381,8 @@ def generate_variables(theme : dict, source : str) ->str:
     result += f"@syntax-color-tag:                          {theme["syntax_vars"]["@syntax-color-tag"]};\n"
     result += f"@syntax-color-attribute:                    {theme["syntax_vars"]["@syntax-color-attribute"]};\n"
     result += f"@syntax-color-string:                       {theme["syntax_vars"]["@syntax-color-string"]};\n"
-    result += "@syntax-color-import:                       @syntax-color-keyword;\n"
-    result += "@syntax-color-snippet:                      @syntax-color-string;\n"
+    result +=  "@syntax-color-import:                       @syntax-color-keyword;\n"
+    result +=  "@syntax-color-snippet:                      @syntax-color-string;\n"
 
     return result
 
@@ -460,7 +522,7 @@ def convert_template(template_path : str) -> NoReturn:
             parsed = parse_ejs_template(template_data)
         else:
             print("---!!! unknown format !!!---")
-        pprint.pp(parsed)
+        # pprint.pp(parsed)
 
         theme_variables = generate_variables(parsed, template_path)
         theme_syntax = generate_syntax(parsed, template_path)
