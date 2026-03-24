@@ -14,6 +14,10 @@ settings_path = "../lib/base2tone_bundle_settings.json"
 package_path = "../package.json"
 readme_path = "../README.md"
 
+base_name = "Base2Tone"
+base_github = "https://github.com/atelierbram/Base2Tone"
+theme_github = "https://github.com/Digital-Punishment/base2tone-ultimate-bundle-syntax"
+
 def lower_filename(name: str) -> str:
     """Convert scheme name to file name."""
     return name\
@@ -23,6 +27,7 @@ def lower_filename(name: str) -> str:
         .replace(" ", "-").lower()
 
 def lower_keyword(name: str) -> str:
+    """Generate keyword from scheme name."""
     name = re.sub(r"\(\w+\s*\w+\)", "", name)
     return name\
         .lower()\
@@ -88,14 +93,21 @@ def convert_scheme(scheme_path: Path) -> str:
 
     return scheme_name.replace("-", " ").title()
 
-def generate_readme(name_list: list) -> str:
+def generate_readme(name_list: list, pack_dict: dict) -> str:
     """Generate README.md file."""
-    readme_content = "# Base2Tone Ultimate Syntax Theme Bundle\n"
-    readme_content += "\n![Base2Tone Banner](https://github.com/Digital-Punishment/base2tone-ultimate-bundle-syntax/blob/master/banner.png?raw=true)\n"
-    readme_content += f"\nA Base2Tone syntax theme bundle for Pulsar with {len(name_list)} [Base2Tone](https://github.com/tinted-theming/home) color schemes inside.\n"
+    readme_content = (
+        f"# {pack_dict["package_title"]} Syntax Theme\n"
 
-    readme_content += "\n<details>\n"
-    readme_content += "\n<summary>The following Base16 color schemes are included:</summary>\n"
+        f"\n![{pack_dict["package_title"]} Banner]"
+        f"({theme_github}/blob/master/banner.png?raw=true)\n"
+
+        f"\n{pack_dict["package_title"]} is a syntax theme bundle for Pulsar with "
+        f"{len(name_list)} [{base_name}]({base_github}) "
+        "color schemes inside.\n"
+
+        "\n<details>\n"
+        f"\n<summary>The following {base_name} color schemes are included:</summary>\n"
+    )
 
     schemes_list = ""
     for name in name_list:
@@ -106,38 +118,66 @@ def generate_readme(name_list: list) -> str:
         with scheme_path.open(mode = "r") as scheme_file:
             for line in scheme_file:
                 if "Author:" in line:
-                    author = line.lstrip("/").lstrip(" ").rstrip("\n").removeprefix("Author: ")
+                    author = line.lstrip("/")\
+                    .lstrip(" ")\
+                    .rstrip("\n")\
+                    .removeprefix("Author: ")
+
         schemes_list += f"\n> ###### {name} (Author: {"Unknown" if author == "" else author}):\n"
         if preview_path.exists():
-            schemes_list += f">![name](https://github.com/Digital-Punishment/base2tone-ultimate-bundle-syntax/blob/master/styles/schemes/{scheme_filename}.png?raw=true)\n"
+            schemes_list += f">![{name}]({theme_github}/blob/master/styles/schemes/{scheme_filename}.png?raw=true)\n"
 
     readme_content += schemes_list
-    readme_content += "\n</details>\n"
+    readme_content += (
+        "\n</details>\n"
 
-    readme_content +="\nEach color scheme can be used in a `Dark` or `Light` style.\n"
+        "\nEach color scheme can be used in 4 styles, two _Dark_ and two _Light_.\n"
 
-    readme_content +="\n## Install Base2Tone Ultimate Bundle\n"
-    readme_content +="\nBase2Tone Ultimate Bundle can be installed by going to the _Settings_ view (<kbd>Ctrl + ,</kbd>). Select the _Install_ section on the left, hit the _Themes_ button and search for `Base16 Ultimate Bundle` in the search box. Click on _Install_ on the Base16 Ultimate Bundle card.\n"
-    readme_content +="\nAlternatively, open a terminal and type in\n"
-    readme_content +="\n```\n ppm install base2tone-ultimate-bundle-syntax \n```\n"
-    readme_content +="\nor\n"
-    readme_content +="\n```\n pulsar --package install base2tone-ultimate-bundle-syntax \n```\n"
+        f"\n## Install {pack_dict["package_title"]}\n"
+        f"\n{pack_dict["package_title"]} can be installed by going to the "
+        "_Settings_ view (<kbd>Ctrl + ,</kbd>). Select the _Install_ section on "
+        "the left, hit the _Themes_ button and search for "
+        f"`{pack_dict["package_title"]}` in the search box. Click on _Install_ "
+        f"on the {pack_dict["package_title"]} card.\n"
+        "\nAlternatively, open a terminal and type in\n"
+        f"\n```\n ppm install {pack_dict["package_name"]} \n```\n"
+        "\nor\n"
+        f"\n```\n pulsar --package install {pack_dict["package_name"]} \n```\n"
 
-    readme_content +="\n## Enable Base2Tone Ultimate Bundle\n"
-    readme_content +="\nBase2Tone Ultimate Bundle can be enabled by going to the _Settings_ view (<kbd>Ctrl + ,</kbd>). Select the _Themes_ section on the left side and choose _Base16 Ultimate Bundle_ from the _Syntax Theme_ drop down menu.\n"
+        f"\n## Enable {pack_dict["package_title"]}\n"
+        f"\n{pack_dict["package_title"]} can be enabled by going to the _Settings_ "
+        "view (<kbd>Ctrl + ,</kbd>). Select the _Themes_ section on the left side "
+        f"and choose `{pack_dict["package_title"]}` from the _Syntax Theme_ "
+        "drop down menu.\n"
 
-    readme_content +="\n## Change Base2Tone color scheme\n"
-    readme_content +="\nThe `Default Dark` color scheme is loaded by default.\n"
-    readme_content +="\nThe scheme can be changed by choosing a different `scheme` from the drop down menu in the `Base16 Ultimate Bundle` _Settings_ view.\n"
-    readme_content +="\nMany schemes have `Dark`, `Light` and other variants, but it is also possible to invert text/background colors with `Invert Colors` toggle. This way `Dark` scheme turns into `Light` and vice versa. Most schemes support this feature, but in some cases it may lead to some undesirable effects and color combinations.\n"
-    readme_content +="\nAlternatively, the theme can be changed in the Preview Mode. Toggle the _Command Palette_ (<kbd>Ctrl + Shift + P</kbd>). Type in `Base16 Ultimate Bundle Syntax: Select Theme` and choose another theme from the list. While browsing through the list of available themes a live preview of each selected theme is automatically applied to all open files.\n"
-    readme_content +="\n![Base2Tone Syntax Preview](https://github.com/Digital-Punishment/base2tone-ultimate-bundle-syntax/blob/master/preview.gif?raw=true)\n"
+        f"\n## Change {base_name} color scheme\n"
+        f"\nThe `{pack_dict["default_scheme"]} ({pack_dict["default_style"]})` "
+        "color scheme is loaded by default.\n"
+        "\nThe scheme can be changed by choosing a different `scheme` or `style` "
+        f"from the drop down menu in the `{pack_dict["package_title"]}` _Settings_ "
+        "view.\n"
+        "\nAlternatively, the theme can be changed in the Preview Mode. "
+        "Toggle the _Command Palette_ (<kbd>Ctrl + Shift + P</kbd>). Type in "
+        f"`{pack_dict["package_title"]} Syntax: Select Theme` and choose another "
+        "theme from the list. While browsing through the list of available "
+        "themes a live preview of each selected theme is automatically applied "
+        "to all open files.\n"
+        f"\n![{pack_dict["package_title"]} Syntax Preview]"
+        f"({theme_github}/blob/master/preview.gif?raw=true)\n"
 
-    readme_content +="\n## Credits\n"
-    readme_content +="\nThis is a fork of [Base16 Syntax Theme](https://packages.pulsar-edit.dev/packages/base16-syntax) by [Alchiadus](https://github.com/Alchiadus).\n"
-    # readme_content +="\nThe original [Base16 Theme](https://github.com/chriskempson/base16) is made by [Chris Kempson](http://chriskempson.com).\n"
-    # readme_content +="\nColor schemes converted from [GitHub Repository](https://github.com/tinted-theming/schemes) maintained by [Tinted Theming](https://github.com/tinted-theming) community.\n"
-    readme_content +="\n\n"
+        "\n## Credits\n"
+        "\nThis is a fork of "
+        "[Base16 Syntax Theme](https://packages.pulsar-edit.dev/packages/base16-syntax) "
+        "by [Alchiadus](https://github.com/Alchiadus).\n"
+
+        "\nOriginal [Base2Tone Theme](https://base2t.one) "
+        "is made by [Bram de Haan](https://atelierbramdehaan.nl/) "
+
+        "and is based on "
+        "[DuoTone](http://simurai.com/projects/2016/01/01/duotone-themes) themes "
+        "by [Simurai](http://simurai.com/) for Atom.\n"
+        #"\n\n"
+    )
 
     return readme_content
 
@@ -156,7 +196,9 @@ if __name__ == "__main__":
 
     keywords = {lower_keyword(name) for name in name_list}
     keywords.add("base2tone")
+    keywords.add("dark")
     keywords.add("duotone")
+    keywords.add("light")
     keywords.add("syntax")
     keywords.add("theme")
 
@@ -167,5 +209,12 @@ if __name__ == "__main__":
         json.dump(package_content, package_file, indent = 2)
         package_file.write("\n")
 
+    package_dict = {
+        "package_name": package_content["name"],
+        "package_title": package_content["name"].removesuffix("-syntax").replace("-", " ").title(),
+        "default_scheme": settings_content["config"]["scheme"]["default"],
+        "default_style": settings_content["config"]["style"]["default"],
+}
+
     with Path(readme_path).open(mode = "w") as readme_file:
-        readme_file.write(generate_readme(name_list))
+        readme_file.write(generate_readme(name_list, package_dict))
