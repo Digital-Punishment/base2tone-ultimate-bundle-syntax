@@ -122,6 +122,29 @@ def get_template(url : str) -> dict:
     return result
 
 
+def less_color(text_element : str) -> str:
+    """Extract color code from string."""
+    #{{base01-hex}} in mustache
+    # base["0B"]["hex"] in ejs
+    color_idx = "A0"
+    if '"hex"' in text_element:
+        color_match = re.search(r'base\["(\d|\D)(\d|\D)"\]\["hex"\]', text_element)
+        if color_match:
+            color_idx = color_match[0].removeprefix('base["').removesuffix('"]["hex"]')
+        else:
+            print("---!!! no match !!!---", text_element)
+    elif "-hex" in text_element:
+        color_match = re.search(r"{{base(\d|\D)(\d|\D)-hex}}", text_element)
+        if color_match:
+            color_idx = color_match[0].removeprefix("{{base").removesuffix("-hex}}")
+        else:
+            print("---!!! no match !!!---", text_element)
+    else:
+        print("---!!! no match !!!---", text_element)
+
+    return f"@{base2tone_dict[color_idx]}"
+
+
 def deep_merge(old: dict, new: dict) -> dict:
     """Recursively merges 'new' into 'old'."""
     result = copy.deepcopy(old)
@@ -224,22 +247,6 @@ def add_rule(rule_scope : str, rule_name : str, rule_settings : dict) -> dict:
             rule_settings,
         )
     return result
-
-
-def less_color(text_element : str) -> str:
-    """Extract color code from string."""
-    #{{base01-hex}} in mustache
-    # base["0B"]["hex"] in ejs
-    color_match = re.search(r'base\["(\d|\D)(\d|\D)"\]\["hex"\]', text_element)
-    if not color_match:
-        color_match = re.search(r"{{base(\d|\D)(\d|\D)-hex}}", text_element)
-    color_idx = color_match[0] if color_match else "A0"
-    if not color_match:
-        print("---!!! no match !!!---", text_element)
-    color_idx = color_idx.removeprefix('base["').removesuffix('"]["hex"]')
-    color_idx = color_idx.removeprefix("{{base").removesuffix("-hex}}")
-
-    return f"@{base2tone_dict[color_idx]}"
 
 
 def generate_variables(theme : dict, source : str) ->str:

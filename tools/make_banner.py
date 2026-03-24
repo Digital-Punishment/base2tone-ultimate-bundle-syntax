@@ -177,8 +177,7 @@ if __name__ == "__main__":
     scheme_count = len(settings_content["config"]["scheme"]["enum"])
 
     if args.version != "":
-        ver_match = re.fullmatch(ver_regex, args.version)
-        if ver_match:
+        if ver_match := re.fullmatch(ver_regex, args.version):
             next_ver = ver_match[0]
             print("Next version: ", next_ver)
         elif args.version in ["major", "minor", "patch"]:
@@ -197,8 +196,6 @@ if __name__ == "__main__":
             print("Incorrect version. See 'make_banner.py -h' for instructions.")
     else:
         print("Please, provide a version. See 'make_banner.py -h' for instructions.")
-
-
 
     print(package_name, next_ver, scheme_count)
 
