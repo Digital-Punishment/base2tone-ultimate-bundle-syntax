@@ -6,9 +6,12 @@ module.exports = {
   },
   extends: "eslint:recommended",
   globals: { atom: "readonly" },
+  ignorePatterns: [
+    "tools/schemes/*"
+  ],
   parserOptions: {
     ecmaVersion: "latest",
-    sourceType: "commonjs"
+    sourceType: "module"
   },
   rules: {},
 };
