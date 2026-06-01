@@ -13,7 +13,7 @@ import semantic_version
 # usual:
 # Cartograph CF ML Ligatured CCG, Cascadia Code, Ubuntu Mono
 
-settings_path = "../lib/base2tone_bundle_settings.json"
+settings_path = "../lib/settings.json"
 package_path = "../package.json"
 screenshots_path = "./screenshots/"
 

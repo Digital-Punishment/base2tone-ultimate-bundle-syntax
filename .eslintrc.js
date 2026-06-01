@@ -1,17 +1,15 @@
 module.exports = {
   env: {
     browser: true,
-    es2024: true,
-    node: true
+    es2022: true,
+    node: true,
   },
-  extends: "eslint:recommended",
-  globals: { atom: "readonly" },
-  ignorePatterns: [
-    "tools/schemes/*"
-  ],
+  extends: 'eslint:recommended',
+  globals: { atom: 'readonly' },
+  ignorePatterns: ['tools/schemes/*'],
   parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module"
+    ecmaVersion: 2022,
+    sourceType: 'module',
   },
   rules: {},
 };

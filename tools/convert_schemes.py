@@ -10,7 +10,7 @@ import re
 
 source_path = "./schemes/db/schemes"
 schemes_path = "../styles/schemes"
-settings_path = "../lib/base2tone_bundle_settings.json"
+settings_path = "../lib/settings.json"
 package_path = "../package.json"
 readme_path = "../README.md"
 
