@@ -1,5 +1,5 @@
 {
-  "name": "base2tone-ultimate-bundle-syntax-dev",
+  "name": "base2tone-ultimate-bundle-syntax-tools",
   "theme": "syntax",
   "main": "./lib/bundle",
   "version": "0.0.0",

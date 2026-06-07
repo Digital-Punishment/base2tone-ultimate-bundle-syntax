@@ -1,3 +1,0 @@
-{
-  "lessImports": "@import \"schemes/@{base2tone-scheme}\";\n@import \"@{base2tone-style}/syntax\";\n@import \"@{base2tone-style}/syntax-variables\";\n"
-}

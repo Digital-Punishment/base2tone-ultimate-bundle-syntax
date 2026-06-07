@@ -6,7 +6,8 @@ from typing import NoReturn
 import copy
 import json
 import plistlib
-import pprint
+
+# import pprint
 import re
 import requests
 import time
@@ -21,9 +22,9 @@ template_urls = [
 templates_dir = "./templates"
 styles_dir = "../styles"
 
-settings_path = "../lib/base2tone_bundle_settings.json"
+settings_path = "../lib/settings.json"
 
-MAX_AGE = 30 #days
+MAX_AGE = 30  # days
 
 colors_dict = {
     "base2tone-color-baseA0": "A0",
@@ -34,7 +35,6 @@ colors_dict = {
     "base2tone-color-baseA5": "A5",
     "base2tone-color-baseA6": "A6",
     "base2tone-color-baseA7": "A7",
-
     "base2tone-color-baseB0": "B0",
     "base2tone-color-baseB1": "B1",
     "base2tone-color-baseB2": "B2",
@@ -43,7 +43,6 @@ colors_dict = {
     "base2tone-color-baseB5": "B5",
     "base2tone-color-baseB6": "B6",
     "base2tone-color-baseB7": "B7",
-
     "base2tone-color-baseC0": "C0",
     "base2tone-color-baseC1": "C1",
     "base2tone-color-baseC2": "C2",
@@ -52,7 +51,6 @@ colors_dict = {
     "base2tone-color-baseC5": "C5",
     "base2tone-color-baseC6": "C6",
     "base2tone-color-baseC7": "C7",
-
     "base2tone-color-baseD0": "D0",
     "base2tone-color-baseD1": "D1",
     "base2tone-color-baseD2": "D2",
@@ -64,45 +62,45 @@ colors_dict = {
 }
 base2tone_dict = {v: k for k, v in colors_dict.items()}
 
-variables_dict ={
-    "Variables":                "@syntax-color-variable",
-    "Comments":                 "@syntax-color-comment",
-    "Constants":                "@syntax-color-constant",
-
-    "Values":                   "@syntax-color-value",
-    "Functions":                "@syntax-color-function",
-    "Methods":                  "@syntax-color-method",
-    "Classes":                  "@syntax-color-class",
-    "Keywords":                 "@syntax-color-keyword",
-    "Tags":                     "@syntax-color-tag",
-    "Attributes":               "@syntax-color-attribute",
-
+variables_dict = {
+    "Variables": "@syntax-color-variable",
+    "Comments": "@syntax-color-comment",
+    "Constants": "@syntax-color-constant",
+    "Values": "@syntax-color-value",
+    "Functions": "@syntax-color-function",
+    "Methods": "@syntax-color-method",
+    "Classes": "@syntax-color-class",
+    "Keywords": "@syntax-color-keyword",
+    "Tags": "@syntax-color-tag",
+    "Attributes": "@syntax-color-attribute",
     "Strings, Inherited Class": "@syntax-color-string",
 }
 
 lambda i: i.split("_")[1].upper()
 
 
-def get_template(url : str) -> dict:
+def get_template(url: str) -> dict:
     """Get scheme template from github."""
     result = ""
 
     if not Path(templates_dir).exists():
-        Path(templates_dir).mkdir(parents = True)
+        Path(templates_dir).mkdir(parents=True)
     template_path = Path(templates_dir) / url.rsplit("/", maxsplit=1)[1]
 
     template_actual = False
     if Path(template_path).exists():
         t_mtime = Path(template_path).stat().st_mtime
-        t_age = datetime.now(timezone.utc) - \
-            datetime.fromtimestamp(t_mtime, tz=timezone.utc)
+        t_age = datetime.now(timezone.utc) - datetime.fromtimestamp(
+            t_mtime,
+            tz=timezone.utc,
+        )
         if t_age.days < MAX_AGE:
             template_actual = True
 
     if not template_actual:
         print("Downloading fresh template...")
         time.sleep(0.1)
-        response = requests.get(url, timeout = 5)
+        response = requests.get(url, timeout=5)
         if response.status_code == HTTPStatus.OK:
             cleaned_content = re.sub(r"({#)(.*\n)*(#})", "", response.text)
             cleaned_content = re.sub(r"(<%-)", "", cleaned_content)
@@ -122,9 +120,9 @@ def get_template(url : str) -> dict:
     return result
 
 
-def less_color(text_element : str) -> str:
+def less_color(text_element: str) -> str:
     """Extract color code from string."""
-    #{{base01-hex}} in mustache
+    # {{base01-hex}} in mustache
     # base["0B"]["hex"] in ejs
     color_idx = "A0"
     if '"hex"' in text_element:
@@ -177,7 +175,9 @@ def parse_ejs_template(theme_data: dict) -> dict:
                 settings[field] = less_color(i["settings"][field])
         else:
             if i["name"] in variables_dict:
-                syntax_vars[variables_dict[i["name"]]] = less_color(i["settings"]["foreground"])
+                syntax_vars[variables_dict[i["name"]]] = less_color(
+                    i["settings"]["foreground"],
+                )
             if i["scope"] != "none":
                 i_settings = {}
                 for setting in i["settings"]:
@@ -206,20 +206,20 @@ def parse_ejs_template(theme_data: dict) -> dict:
     return result
 
 
-def add_rule(rule_scope : str, rule_name : str, rule_settings : dict) -> dict:
+def add_rule(rule_scope: str, rule_name: str, rule_settings: dict) -> dict:
     """Split scope into parts and build nested dict."""
     less_prefix = ""
 
-    if rule_scope.startswith(" - "):                    #exlusion selector
+    if rule_scope.startswith(" - "):  # exlusion selector
         less_prefix = "-."
         rule_scope = rule_scope.removeprefix(" - ")
-    elif rule_scope.startswith(" "):                    #descendant selector
+    elif rule_scope.startswith(" "):  # descendant selector
         less_prefix = "_."
         rule_scope = rule_scope.removeprefix(" ")
-    elif rule_scope.startswith("."):                    #nested selector
+    elif rule_scope.startswith("."):  # nested selector
         less_prefix = "&."
         rule_scope = rule_scope.removeprefix(".")
-    else:                                               #root parent
+    else:  # root parent
         less_prefix = "."
 
     next_minus = rule_scope.find(" - ") if " - " in rule_scope else len(rule_scope)
@@ -249,9 +249,9 @@ def add_rule(rule_scope : str, rule_name : str, rule_settings : dict) -> dict:
     return result
 
 
-def generate_variables(theme : dict, source : str) ->str:
+def generate_variables(theme: dict, source: str) -> str:
     """Generate "syntax-variables.less" from parsed theme."""
-    #default colors
+    # default colors
     text_color = theme["settings"]["foreground"]
     cursor_color = theme["settings"]["caret"]
     selection_color = theme["settings"]["selection"]
@@ -298,108 +298,114 @@ def generate_variables(theme : dict, source : str) ->str:
         else theme["settings"]["foreground"]
     )
 
-    #color tweaks for dark style
+    # color tweaks for dark style
     if "dark" in source:
-        background_color =                  f"@{base2tone_dict["A0"]}"
-        indent_guide_color =                f"@{base2tone_dict["A1"]}"
-        selection_color =                   f"@{base2tone_dict["A2"]}"
-        #A3
-        gutter_text_color =                 f"@{base2tone_dict["A4"]}"
-        text_color =                        f"@{base2tone_dict["A5"]}"
-        #A6
-        gutter_text_selected_color =        f"@{base2tone_dict["A7"]}"
+        background_color = f"@{base2tone_dict['A0']}"
+        indent_guide_color = f"@{base2tone_dict['A1']}"
+        selection_color = f"@{base2tone_dict['A2']}"
+        # A3
+        gutter_text_color = f"@{base2tone_dict['A4']}"
+        text_color = f"@{base2tone_dict['A5']}"
+        # A6
+        gutter_text_selected_color = f"@{base2tone_dict['A7']}"
 
-        selection_flash_color =              "@syntax-text-color"
+        selection_flash_color = "@syntax-text-color"
 
-        wrap_guide_color =                   "@syntax-selection-color"
-        invisible_character_color =          "@syntax-indent-guide-color"
+        wrap_guide_color = "@syntax-selection-color"
+        invisible_character_color = "@syntax-indent-guide-color"
 
-        result_marker_color =                "@syntax-selection-color"
-        result_marker_selected_color =       "@syntax-text-color"
+        result_marker_color = "@syntax-selection-color"
+        result_marker_selected_color = "@syntax-text-color"
 
-        gutter_background_color =            "@syntax-indent-guide-color"
-        gutter_background_selected_color =   "@syntax-gutter-background-color"
+        gutter_background_color = "@syntax-indent-guide-color"
+        gutter_background_selected_color = "@syntax-gutter-background-color"
 
-    #color tweaks for light style
+    # color tweaks for light style
     if "light" in source:
-        background_color =                  f"@{base2tone_dict["C7"]}"
-        indent_guide_color =                f"@{base2tone_dict["C6"]}"
-        selection_color =                   f"@{base2tone_dict["C5"]}"
-        #C4
-        gutter_text_color =                 f"@{base2tone_dict["C3"]}"
-        text_color =                        f"@{base2tone_dict["C2"]}"
-        #C1
-        gutter_text_selected_color =        f"@{base2tone_dict["C0"]}"
+        background_color = f"@{base2tone_dict['C7']}"
+        indent_guide_color = f"@{base2tone_dict['C6']}"
+        selection_color = f"@{base2tone_dict['C5']}"
+        # C4
+        gutter_text_color = f"@{base2tone_dict['C3']}"
+        text_color = f"@{base2tone_dict['C2']}"
+        # C1
+        gutter_text_selected_color = f"@{base2tone_dict['C0']}"
 
-        selection_flash_color =              "@syntax-text-color"
+        selection_flash_color = "@syntax-text-color"
 
-        wrap_guide_color =                   "@syntax-selection-color"
-        invisible_character_color =          "@syntax-indent-guide-color"
+        wrap_guide_color = "@syntax-selection-color"
+        invisible_character_color = "@syntax-indent-guide-color"
 
-        result_marker_color =                "@syntax-selection-color"
-        result_marker_selected_color =       "@syntax-text-color"
+        result_marker_color = "@syntax-selection-color"
+        result_marker_selected_color = "@syntax-text-color"
 
-        gutter_background_color =            "@syntax-indent-guide-color"
-        gutter_background_selected_color =   "@syntax-gutter-background-color"
+        gutter_background_color = "@syntax-indent-guide-color"
+        gutter_background_selected_color = "@syntax-gutter-background-color"
 
-    result =   ""
-    result += f"//{theme["name"]}\n"
+    result = ""
+    result += f"//{theme['name']}\n"
     result += f"//Converted from {source}\n"
-    result += f"//Original Author: {theme["author"]}\n"
+    result += f"//Original Author: {theme['author']}\n"
 
-    result +=  "\n// General colors\n"
+    result += "\n// General colors\n"
     result += f"@syntax-text-color:                         {text_color};\n"
     result += f"@syntax-cursor-color:                       {cursor_color};\n"
     result += f"@syntax-selection-color:                    {selection_color};\n"
     result += f"@syntax-selection-flash-color:              {selection_flash_color};\n"
     result += f"@syntax-background-color:                   {background_color};\n"
 
-    result +=  "\n// Guide colors\n"
+    result += "\n// Guide colors\n"
     result += f"@syntax-wrap-guide-color:                   {wrap_guide_color};\n"
     result += f"@syntax-indent-guide-color:                 {indent_guide_color};\n"
-    result += f"@syntax-invisible-character-color:          {invisible_character_color};\n"
+    result += (
+        f"@syntax-invisible-character-color:          {invisible_character_color};\n"
+    )
 
-    result +=  "\n// For find and replace markers\n"
+    result += "\n// For find and replace markers\n"
     result += f"@syntax-result-marker-color:                {result_marker_color};\n"
-    result += f"@syntax-result-marker-color-selected:       {result_marker_selected_color};\n"
+    result += (
+        f"@syntax-result-marker-color-selected:       {result_marker_selected_color};\n"
+    )
 
-    result +=  "\n// Gutter colors\n"
+    result += "\n// Gutter colors\n"
     result += f"@syntax-gutter-text-color:                  {gutter_text_color};\n"
-    result += f"@syntax-gutter-text-color-selected:         {gutter_text_selected_color};\n"
+    result += (
+        f"@syntax-gutter-text-color-selected:         {gutter_text_selected_color};\n"
+    )
     result += f"@syntax-gutter-background-color:            if(@base2tone-contrastGutter, {gutter_background_color}, @syntax-background-color);\n"
     result += f"@syntax-gutter-background-color-selected:   {gutter_background_selected_color};\n"
 
-    result +=  "\n// For git diff info. i.e. in the gutter\n"
-    result +=  "@syntax-color-renamed:                      hsl(hue(blue), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
-    result +=  "@syntax-color-added:                        hsl(hue(green), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
-    result +=  "@syntax-color-modified:                     hsl(hue(orange), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
-    result +=  "@syntax-color-removed:                      hsl(hue(red), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
+    result += "\n// For git diff info. i.e. in the gutter\n"
+    result += "@syntax-color-renamed:                      hsl(hue(blue), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
+    result += "@syntax-color-added:                        hsl(hue(green), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
+    result += "@syntax-color-modified:                     hsl(hue(orange), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
+    result += "@syntax-color-removed:                      hsl(hue(red), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
 
-    result +=  "\n// For language entity colors\n"
-    result += f"@syntax-color-variable:                     {theme["syntax_vars"]["@syntax-color-variable"]};\n"
-    result += f"@syntax-color-comment:                      {theme["syntax_vars"]["@syntax-color-comment"]};\n"
-    result += f"@syntax-color-constant:                     {theme["syntax_vars"]["@syntax-color-constant"]};\n"
-    result +=  "@syntax-color-property:                     @syntax-text-color;\n"
-    result += f"@syntax-color-value:                        {theme["syntax_vars"]["@syntax-color-value"]};\n"
-    result += f"@syntax-color-function:                     {theme["syntax_vars"]["@syntax-color-function"]};\n"
-    result += f"@syntax-color-method:                       {theme["syntax_vars"]["@syntax-color-method"]};\n"
-    result += f"@syntax-color-class:                        {theme["syntax_vars"]["@syntax-color-class"]};\n"
-    result += f"@syntax-color-keyword:                      {theme["syntax_vars"]["@syntax-color-keyword"]};\n"
-    result += f"@syntax-color-tag:                          {theme["syntax_vars"]["@syntax-color-tag"]};\n"
-    result += f"@syntax-color-attribute:                    {theme["syntax_vars"]["@syntax-color-attribute"]};\n"
-    result += f"@syntax-color-string:                       {theme["syntax_vars"]["@syntax-color-string"]};\n"
-    result +=  "@syntax-color-import:                       @syntax-color-keyword;\n"
-    result +=  "@syntax-color-snippet:                      @syntax-color-string;\n"
+    result += "\n// For language entity colors\n"
+    result += f"@syntax-color-variable:                     {theme['syntax_vars']['@syntax-color-variable']};\n"
+    result += f"@syntax-color-comment:                      {theme['syntax_vars']['@syntax-color-comment']};\n"
+    result += f"@syntax-color-constant:                     {theme['syntax_vars']['@syntax-color-constant']};\n"
+    result += "@syntax-color-property:                     @syntax-text-color;\n"
+    result += f"@syntax-color-value:                        {theme['syntax_vars']['@syntax-color-value']};\n"
+    result += f"@syntax-color-function:                     {theme['syntax_vars']['@syntax-color-function']};\n"
+    result += f"@syntax-color-method:                       {theme['syntax_vars']['@syntax-color-method']};\n"
+    result += f"@syntax-color-class:                        {theme['syntax_vars']['@syntax-color-class']};\n"
+    result += f"@syntax-color-keyword:                      {theme['syntax_vars']['@syntax-color-keyword']};\n"
+    result += f"@syntax-color-tag:                          {theme['syntax_vars']['@syntax-color-tag']};\n"
+    result += f"@syntax-color-attribute:                    {theme['syntax_vars']['@syntax-color-attribute']};\n"
+    result += f"@syntax-color-string:                       {theme['syntax_vars']['@syntax-color-string']};\n"
+    result += "@syntax-color-import:                       @syntax-color-keyword;\n"
+    result += "@syntax-color-snippet:                      @syntax-color-string;\n"
 
     return result
 
 
-def generate_syntax(theme : dict, source : str) ->str:
+def generate_syntax(theme: dict, source: str) -> str:
     """Generate "syntax.less" from parsed theme."""
     result = ""
-    result += f"//{theme["name"]}\n"
+    result += f"//{theme['name']}\n"
     result += f"//Converted from {source}\n"
-    result += f"//Original Author: {theme["author"]}\n"
+    result += f"//Original Author: {theme['author']}\n"
 
     for rule in sorted(theme["rules"]):
         result += use_rule(theme["rules"][rule], rule, 0)
@@ -407,31 +413,36 @@ def generate_syntax(theme : dict, source : str) ->str:
     return result
 
 
-def use_rule(rule : dict, rule_scope : str, indentation : int) -> str:
+def use_rule(rule: dict, rule_scope: str, indentation: int) -> str:
     """Generate .less rules from dict."""
     # print(rule)
     result = ""
     is_complex = False
     if "rule.name" in rule:
-        result += "\n" + indent(indentation) + f"//{rule["rule.name"]} \n"
+        result += "\n" + indent(indentation) + f"//{rule['rule.name']} \n"
 
-    #If there is no other sub-rules, print settings in a block with curled brackets
+    # If there is no other sub-rules, print settings in a block with curled brackets
     if len({k: v for k, v in rule.items() if "rule." not in k}) == 0:
         result += indent(indentation) + f"{rule_scope} {{\n"
         is_complex = True
         for i in sorted(rule):
             if "rule." in i and ".settings" in i:
                 for s, v in rule[i].items():
-                    result += indent(indentation + 2) + format_setting(s, v, indentation) + "\n"
+                    result += (
+                        indent(indentation + 2)
+                        + format_setting(s, v, indentation)
+                        + "\n"
+                    )
 
-    #If there is only one sub-rule, combine selector into a single string
+    # If there is only one sub-rule, combine selector into a single string
     elif len(rule) == 1:
         for i in sorted(rule):
             if "rule." not in i:
-                i_scope = i\
-                    .replace("&.", ".", count = 1)\
-                    .replace("_.", " .", count = 1)\
-                    .replace("-.", ":not(.", count = 1)
+                i_scope = (
+                    i.replace("&.", ".", count=1)
+                    .replace("_.", " .", count=1)
+                    .replace("-.", ":not(.", count=1)
+                )
                 if i.startswith("-."):
                     i_scope += ")"
                 if rule_scope.endswith(")"):
@@ -440,30 +451,40 @@ def use_rule(rule : dict, rule_scope : str, indentation : int) -> str:
                 result += use_rule(rule[i], rule_scope + i_scope, indentation)
 
     else:
-        #If there is more than 1 sub-rule, make a block with curled brackets
+        # If there is more than 1 sub-rule, make a block with curled brackets
         if indentation == 0:
             result += "\n"
         result += indent(indentation) + f"{rule_scope} {{\n"
         is_complex = True
 
-        #Some rules have both settings and sub-rules
+        # Some rules have both settings and sub-rules
         for i in sorted(rule):
             if "rule." in i and ".settings" in i:
                 for s, v in rule[i].items():
-                    result += indent(indentation + 2) + format_setting(s, v, indentation) + "\n"
+                    result += (
+                        indent(indentation + 2)
+                        + format_setting(s, v, indentation)
+                        + "\n"
+                    )
         for i in sorted(rule):
             if "rule." not in i:
-                i_scope = i\
-                    .replace("_.", ".", count = 1)\
-                    .replace("-.", "&:not(.", count = 1)
+                i_scope = i.replace("_.", ".", count=1).replace(
+                    "-.",
+                    "&:not(.",
+                    count=1,
+                )
                 if i.startswith("-."):
                     i_scope += ")"
                 if rule_scope.endswith(")"):
                     rule_scope = rule_scope.removesuffix(")")
                     i_scope += ")"
-                result += indent(indentation) + use_rule(rule[i], i_scope, indentation + 2)
+                result += indent(indentation) + use_rule(
+                    rule[i],
+                    i_scope,
+                    indentation + 2,
+                )
 
-    #Close brackets as needed
+    # Close brackets as needed
     if is_complex:
         result += indent(indentation) + "}\n"
 
@@ -472,7 +493,7 @@ def use_rule(rule : dict, rule_scope : str, indentation : int) -> str:
 
 def indent(indentation: int) -> str:
     """Generate indentation string with spaces."""
-    return (" " * indentation)
+    return " " * indentation
 
 
 def format_setting(setting: str, value: str, indentation: int) -> str:
@@ -489,12 +510,12 @@ def format_setting(setting: str, value: str, indentation: int) -> str:
             newstring = True
         if "italic" in value:
             if newstring:
-                result +="\n" + indent(indentation + 2)
+                result += "\n" + indent(indentation + 2)
             result += "font-style: italic;"
             newstring = True
         if "normal" in value or value == "":
             if newstring:
-                result +="\n" + indent(indentation + 2)
+                result += "\n" + indent(indentation + 2)
             result += "font-weight: normal;\n" + indent(indentation + 2)
             result += "font-style: normal;"
             newstring = True
@@ -508,17 +529,17 @@ def format_setting(setting: str, value: str, indentation: int) -> str:
     return result
 
 
-def write_style(content : str, filename : str) -> NoReturn:
+def write_style(content: str, filename: str) -> NoReturn:
     """Write .less style to a file."""
     style_path = Path(styles_dir) / Path(filename).with_suffix(".less")
     if not Path(style_path.parent).exists():
-        Path(style_path.parent).mkdir(parents = True)
+        Path(style_path.parent).mkdir(parents=True)
 
     with Path.open(style_path, "w") as style_file:
         style_file.write(content)
 
 
-def convert_template(template_path : str) -> NoReturn:
+def convert_template(template_path: str) -> NoReturn:
     """Convert file from Sublime/Textmate template to Pulsar theme."""
     template_data = get_template(template_path)
     parsed = {}
@@ -537,16 +558,18 @@ def convert_template(template_path : str) -> NoReturn:
         # print("\nVariables:\n", theme_variables)
         # print("\nSyntax:\n", theme_syntax)
         style_name = PurePath(template_path).stem
-        write_style(theme_variables, style_name + "/syntax-variables")
-        write_style(theme_syntax, style_name + "/syntax")
+        write_style(theme_variables, "./styles/" + style_name + "-syntax-variables")
+        write_style(theme_syntax, "./styles/" + style_name + "-syntax")
     return style_name
 
 
 if __name__ == "__main__":
-    style_list = [convert_template(style).replace("-", " ").title() for style in template_urls]
-    with Path(settings_path).open(mode = "r") as settings_file:
+    style_list = [
+        convert_template(style).replace("-", " ").title() for style in template_urls
+    ]
+    with Path(settings_path).open(mode="r") as settings_file:
         settings_content = json.load(settings_file)
     settings_content["config"]["style"]["enum"] = sorted(style_list)
-    with Path(settings_path).open(mode = "w") as settings_file:
-        json.dump(settings_content, settings_file, indent = 2)
+    with Path(settings_path).open(mode="w") as settings_file:
+        json.dump(settings_content, settings_file, indent=2)
         settings_file.write("\n")
