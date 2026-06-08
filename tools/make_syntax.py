@@ -298,6 +298,24 @@ def generate_variables(theme: dict, source: str) -> str:
         else theme["settings"]["foreground"]
     )
 
+    color_black = "black"
+    color_red = "red"
+    color_green = "green"
+    color_yellow = "yellow"
+    color_blue = "blue"
+    color_magenta = "magenta"
+    color_cyan = "cyan"
+    color_white = "white"
+
+    color_bright_black = "lighten(black, 10%)"
+    color_bright_red = "lighten(red, 10%)"
+    color_bright_green = "lighten(green, 10%)"
+    color_bright_yellow = "lighten(yellow, 10%)"
+    color_bright_blue = "lighten(blue, 10%)"
+    color_bright_magenta = "lighten(magenta, 10%)"
+    color_bright_cyan = "lighten(cyan, 10%)"
+    color_bright_white = "lighten(white, 10%)"
+
     # color tweaks for dark style
     if "dark" in source:
         background_color = f"@{base2tone_dict['A0']}"
@@ -319,6 +337,52 @@ def generate_variables(theme: dict, source: str) -> str:
 
         gutter_background_color = "@syntax-indent-guide-color"
         gutter_background_selected_color = "@syntax-gutter-background-color"
+
+        color_black = f"@{base2tone_dict['A0']}"
+        color_red = f"@{base2tone_dict['B2']}"
+        color_green = f"@{base2tone_dict['D4']}"
+        color_yellow = f"@{base2tone_dict['D7']}"
+        color_blue = f"@{base2tone_dict['B3']}"
+        color_magenta = f"@{base2tone_dict['D4']}"
+        color_cyan = f"@{base2tone_dict['B4']}"
+        color_white = f"@{base2tone_dict['A6']}"
+
+        color_bright_black = f"@{base2tone_dict['A3']}"
+        color_bright_red = f"@{base2tone_dict['D5']}"
+        color_bright_green = f"@{base2tone_dict['A1']}"
+        color_bright_yellow = f"@{base2tone_dict['A2']}"
+        color_bright_blue = f"@{base2tone_dict['A4']}"
+        color_bright_magenta = f"@{base2tone_dict['B6']}"
+        color_bright_cyan = f"@{base2tone_dict['D3']}"
+        color_bright_white = f"@{base2tone_dict['B7']}"
+
+        # /* Base2Tone <%- scheme %> Dark colorscheme <%- author %>
+        #  * HyperTerm template by Bram de Haan (https://github.com/atelierbram/base16-hyperterm) based on HyperTerm-DuoTone-Dark by Wilson Miner (https://github.com/wilsonminer/hyperterm-duotone-dark)
+        #  */
+        #
+        # const backgroundColor = '#<%- base["A0"]["hex"] %>';
+        # const foregroundColor = '#<%- base["A6"]["hex"] %>';
+        # const borderColor = 'rgba(0, 0, 0, 0)';
+        # const cursorColor = '#<%- base["D2"]["hex"] %>'; // opacity set in .termCSS: see under
+        #
+        # const colors = [
+        #   backgroundColor, //  black
+        #   '#<%- base["B2"]["hex"] %>', //  red
+        #   '#<%- base["D4"]["hex"] %>', //  green
+        #   '#<%- base["D7"]["hex"] %>', //  yellow
+        #   '#<%- base["B3"]["hex"] %>', //  blue
+        #   '#<%- base["D4"]["hex"] %>', //  magenta
+        #   '#<%- base["B4"]["hex"] %>', //  cyan
+        #   '#<%- base["A6"]["hex"] %>', //  white
+        #   '#<%- base["A3"]["hex"] %>', //  lightBlack
+        #   '#<%- base["D5"]["hex"] %>', //  lightRed
+        #   '#<%- base["A1"]["hex"] %>', //  lightGreen
+        #   '#<%- base["A2"]["hex"] %>', //  lightYellow
+        #   '#<%- base["A4"]["hex"] %>', //  lightBlue
+        #   '#<%- base["B6"]["hex"] %>', //  lightMagenta
+        #   '#<%- base["D3"]["hex"] %>', //  lightCyan
+        #   '#<%- base["B7"]["hex"] %>'  //  lightWhite
+        # ]
 
     # color tweaks for light style
     if "light" in source:
@@ -342,62 +406,192 @@ def generate_variables(theme: dict, source: str) -> str:
         gutter_background_color = "@syntax-indent-guide-color"
         gutter_background_selected_color = "@syntax-gutter-background-color"
 
-    result = ""
-    result += f"//{theme['name']}\n"
-    result += f"//Converted from {source}\n"
-    result += f"//Original Author: {theme['author']}\n"
+        color_black = f"@{base2tone_dict['C7']}"
+        color_red = f"@{base2tone_dict['D0']}"
+        color_green = f"@{base2tone_dict['D3']}"
+        color_yellow = f"@{base2tone_dict['D4']}"
+        color_blue = f"@{base2tone_dict['B0']}"
+        color_magenta = f"@{base2tone_dict['D2']}"
+        color_cyan = f"@{base2tone_dict['B4']}"
+        color_white = f"@{base2tone_dict['C3']}"
 
-    result += "\n// General colors\n"
-    result += f"@syntax-text-color:                         {text_color};\n"
-    result += f"@syntax-cursor-color:                       {cursor_color};\n"
-    result += f"@syntax-selection-color:                    {selection_color};\n"
-    result += f"@syntax-selection-flash-color:              {selection_flash_color};\n"
-    result += f"@syntax-background-color:                   {background_color};\n"
+        color_bright_black = f"@{base2tone_dict['A2']}"
+        color_bright_red = f"@{base2tone_dict['B5']}"
+        color_bright_green = f"@{base2tone_dict['A7']}"
+        color_bright_yellow = f"@{base2tone_dict['D5']}"
+        color_bright_blue = f"@{base2tone_dict['B4']}"
+        color_bright_magenta = f"@{base2tone_dict['C4']}"
+        color_bright_cyan = f"@{base2tone_dict['B6']}"
+        color_bright_white = f"@{base2tone_dict['C7']}"
 
-    result += "\n// Guide colors\n"
-    result += f"@syntax-wrap-guide-color:                   {wrap_guide_color};\n"
-    result += f"@syntax-indent-guide-color:                 {indent_guide_color};\n"
-    result += (
-        f"@syntax-invisible-character-color:          {invisible_character_color};\n"
+        # /* Base2Tone <%- scheme %> Light colorscheme <%- author %>
+        #  * HyperTerm template by Bram de Haan (https://github.com/atelierbram/base16-hyperterm)
+        #  */
+        #
+        # const backgroundColor = '#<%- base["C7"]["hex"] %>';
+        # const foregroundColor = '#<%- base["D4"]["hex"] %>';
+        # const borderColor = 'rgba(0, 0, 0, 0)';
+        # const cursorColor = '#<%- base["D1"]["hex"] %>'; // opacity set in .termCSS: see under
+        #
+        # const colors = [
+        #   backgroundColor, //  black
+        #   '#<%- base["D0"]["hex"] %>', //  red
+        #   '#<%- base["D3"]["hex"] %>', //  green
+        #   '#<%- base["D4"]["hex"] %>', //  yellow
+        #   '#<%- base["B0"]["hex"] %>', //  blue
+        #   '#<%- base["D2"]["hex"] %>', //  magenta
+        #   '#<%- base["B4"]["hex"] %>', //  cyan
+        #   '#<%- base["C3"]["hex"] %>', //  white
+        #   '#<%- base["A2"]["hex"] %>', //  lightBlack
+        #   '#<%- base["B5"]["hex"] %>', //  lightRed
+        #   '#<%- base["A7"]["hex"] %>', //  lightGreen
+        #   '#<%- base["D5"]["hex"] %>', //  lightYellow
+        #   '#<%- base["B4"]["hex"] %>', //  lightBlue
+        #   '#<%- base["C4"]["hex"] %>', //  lightMagenta
+        #   '#<%- base["B6"]["hex"] %>', //  lightCyan
+        #   '#<%- base["C7"]["hex"] %>' //  lightWhite
+        # ]
+
+    return (
+        f"//{theme['name']}\n"
+        f"//Converted from {source}\n"
+        f"//Original Author: {theme['author']}\n"
+        "\n"
+        "// General colors\n"
+        "@syntax-text-color:                         "
+        f"{text_color};\n"
+        "@syntax-cursor-color:                       "
+        f"{cursor_color};\n"
+        "@syntax-selection-color:                    "
+        f"{selection_color};\n"
+        "@syntax-selection-flash-color:              "
+        f"{selection_flash_color};\n"
+        "@syntax-background-color:                   "
+        f"{background_color};\n"
+        "\n"
+        "// Guide colors\n"
+        "@syntax-wrap-guide-color:                   "
+        f"{wrap_guide_color};\n"
+        "@syntax-indent-guide-color:                 "
+        f"{indent_guide_color};\n"
+        "@syntax-invisible-character-color:          "
+        f"{invisible_character_color};\n"
+        "\n"
+        "// For find and replace markers\n"
+        "@syntax-result-marker-color:                "
+        f"{result_marker_color};\n"
+        "@syntax-result-marker-color-selected:       "
+        f"{result_marker_selected_color};\n"
+        "\n"
+        "// Gutter colors\n"
+        "@syntax-gutter-text-color:                  "
+        f"{gutter_text_color};\n"
+        "@syntax-gutter-text-color-selected:         "
+        f"{gutter_text_selected_color};\n"
+        "@syntax-gutter-background-color:            "
+        f"if(@base2tone-contrastGutter, {gutter_background_color}, @syntax-background-color);\n"
+        "@syntax-gutter-background-color-selected:   "
+        f"{gutter_background_selected_color};\n"
+        "\n"
+        "// For git diff info. i.e. in the gutter\n"
+        "@syntax-color-added:                        "
+        ".change-hue(green, @syntax-cursor-color)[@result];\n"
+        "@syntax-color-modified:                     "
+        ".change-hue(orange, @syntax-cursor-color)[@result];\n"
+        "@syntax-color-removed:                      "
+        ".change-hue(red, @syntax-cursor-color)[@result];\n"
+        "@syntax-color-renamed:                      "
+        ".change-hue(blue, @syntax-cursor-color)[@result];\n"
+        "\n"
+        "// For language entity colors\n"
+        "@syntax-color-variable:                     "
+        f"{theme['syntax_vars']['@syntax-color-variable']};\n"
+        "@syntax-color-constant:                     "
+        f"{theme['syntax_vars']['@syntax-color-constant']};\n"
+        "@syntax-color-property:                     "
+        "@syntax-text-color;\n"
+        "@syntax-color-value:                        "
+        f"{theme['syntax_vars']['@syntax-color-value']};\n"
+        "@syntax-color-function:                     "
+        f"{theme['syntax_vars']['@syntax-color-function']};\n"
+        "@syntax-color-method:                       "
+        f"{theme['syntax_vars']['@syntax-color-method']};\n"
+        "@syntax-color-class:                        "
+        f"{theme['syntax_vars']['@syntax-color-class']};\n"
+        "@syntax-color-keyword:                      "
+        f"{theme['syntax_vars']['@syntax-color-keyword']};\n"
+        "@syntax-color-tag:                          "
+        f"{theme['syntax_vars']['@syntax-color-tag']};\n"
+        "@syntax-color-attribute:                    "
+        f"{theme['syntax_vars']['@syntax-color-attribute']};\n"
+        "@syntax-color-import:                       "
+        "@syntax-color-keyword;\n"
+        "@syntax-color-string:                       "
+        f"{theme['syntax_vars']['@syntax-color-string']};\n"
+        "@syntax-color-snippet:                      "
+        "@syntax-color-string;\n"
+        "@syntax-color-comment:                      "
+        f"{theme['syntax_vars']['@syntax-color-comment']};\n"
+        "\n"
+        "// Terminal variables\n"
+        "\n"
+        "// The ordinary text color of the terminal.\n"
+        "@terminal-text-color:                       "
+        "@syntax-text-color;\n"
+        "// The background color of the terminal.\n"
+        "@terminal-background-color:                 "
+        "@syntax-background-color;\n"
+        "// The background color of a selected text block.\n"
+        "@terminal-selection-background-color:       "
+        "@syntax-selection-color;\n"
+        "// The text color of selected text.\n"
+        "@terminal-selection-text-color:             "
+        "@syntax-text-color;\n"
+        "// The color of the cursor.\n"
+        "@terminal-cursor-color:                     "
+        "@syntax-cursor-color;\n"
+        "\n"
+        "// The color of the outline around a “find” result when it is inactive.\n"
+        "@terminal-result-marker-color:              "
+        "@syntax-result-marker-color;\n"
+        "// The color of the outline around a “find” result when it is active.\n"
+        "@terminal-result-marker-color-selected:     "
+        "@syntax-result-marker-color-selected;\n"
+        "\n"
+        "@terminal-color-black:                      "
+        f"if(@base2tone-colorfulTerminal, greyscale(@syntax-background-color), {color_black});\n"
+        "@terminal-color-red:                        "
+        f"if(@base2tone-colorfulTerminal, .change-hue(red, @syntax-cursor-color)[@result], {color_red});\n"
+        "@terminal-color-green:                      "
+        f"if(@base2tone-colorfulTerminal, .change-hue(green, @syntax-cursor-color)[@result], {color_green});\n"
+        "@terminal-color-yellow:                     "
+        f"if(@base2tone-colorfulTerminal, .change-hue(yellow, @syntax-cursor-color)[@result], {color_yellow});\n"
+        "@terminal-color-blue:                       "
+        f"if(@base2tone-colorfulTerminal, .change-hue(blue, @syntax-cursor-color)[@result], {color_blue});\n"
+        "@terminal-color-magenta:                    "
+        f"if(@base2tone-colorfulTerminal, .change-hue(magenta, @syntax-cursor-color)[@result], {color_magenta});\n"
+        "@terminal-color-cyan:                       "
+        f"if(@base2tone-colorfulTerminal, .change-hue(cyan, @syntax-cursor-color)[@result], {color_cyan});\n"
+        "@terminal-color-white:                      "
+        f"if(@base2tone-colorfulTerminal, greyscale(@syntax-text-color), {color_white});\n"
+        "\n"
+        "@terminal-color-bright-black:               "
+        f"if(@base2tone-colorfulTerminal, lighten(@terminal-color-black, 10%), {color_bright_black});\n"
+        "@terminal-color-bright-red:                 "
+        f"if(@base2tone-colorfulTerminal, lighten(@terminal-color-red, 10%), {color_bright_red});\n"
+        "@terminal-color-bright-green:               "
+        f"if(@base2tone-colorfulTerminal, lighten(@terminal-color-green, 10%), {color_bright_green});\n"
+        "@terminal-color-bright-yellow:              "
+        f"if(@base2tone-colorfulTerminal, lighten(@terminal-color-yellow, 10%), {color_bright_yellow});\n"
+        "@terminal-color-bright-blue:                "
+        f"if(@base2tone-colorfulTerminal, lighten(@terminal-color-blue, 10%), {color_bright_blue});\n"
+        "@terminal-color-bright-magenta:             "
+        f"if(@base2tone-colorfulTerminal, lighten(@terminal-color-magenta, 10%), {color_bright_magenta});\n"
+        "@terminal-color-bright-cyan:                "
+        f"if(@base2tone-colorfulTerminal, lighten(@terminal-color-cyan, 10%), {color_bright_cyan});\n"
+        "@terminal-color-bright-white:               "
+        f"if(@base2tone-colorfulTerminal, lighten(@terminal-color-white, 10%), {color_bright_white});\n"
     )
-
-    result += "\n// For find and replace markers\n"
-    result += f"@syntax-result-marker-color:                {result_marker_color};\n"
-    result += (
-        f"@syntax-result-marker-color-selected:       {result_marker_selected_color};\n"
-    )
-
-    result += "\n// Gutter colors\n"
-    result += f"@syntax-gutter-text-color:                  {gutter_text_color};\n"
-    result += (
-        f"@syntax-gutter-text-color-selected:         {gutter_text_selected_color};\n"
-    )
-    result += f"@syntax-gutter-background-color:            if(@base2tone-contrastGutter, {gutter_background_color}, @syntax-background-color);\n"
-    result += f"@syntax-gutter-background-color-selected:   {gutter_background_selected_color};\n"
-
-    result += "\n// For git diff info. i.e. in the gutter\n"
-    result += "@syntax-color-renamed:                      hsl(hue(blue), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
-    result += "@syntax-color-added:                        hsl(hue(green), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
-    result += "@syntax-color-modified:                     hsl(hue(orange), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
-    result += "@syntax-color-removed:                      hsl(hue(red), saturation(@syntax-cursor-color), lightness(@syntax-cursor-color));\n"
-
-    result += "\n// For language entity colors\n"
-    result += f"@syntax-color-variable:                     {theme['syntax_vars']['@syntax-color-variable']};\n"
-    result += f"@syntax-color-comment:                      {theme['syntax_vars']['@syntax-color-comment']};\n"
-    result += f"@syntax-color-constant:                     {theme['syntax_vars']['@syntax-color-constant']};\n"
-    result += "@syntax-color-property:                     @syntax-text-color;\n"
-    result += f"@syntax-color-value:                        {theme['syntax_vars']['@syntax-color-value']};\n"
-    result += f"@syntax-color-function:                     {theme['syntax_vars']['@syntax-color-function']};\n"
-    result += f"@syntax-color-method:                       {theme['syntax_vars']['@syntax-color-method']};\n"
-    result += f"@syntax-color-class:                        {theme['syntax_vars']['@syntax-color-class']};\n"
-    result += f"@syntax-color-keyword:                      {theme['syntax_vars']['@syntax-color-keyword']};\n"
-    result += f"@syntax-color-tag:                          {theme['syntax_vars']['@syntax-color-tag']};\n"
-    result += f"@syntax-color-attribute:                    {theme['syntax_vars']['@syntax-color-attribute']};\n"
-    result += f"@syntax-color-string:                       {theme['syntax_vars']['@syntax-color-string']};\n"
-    result += "@syntax-color-import:                       @syntax-color-keyword;\n"
-    result += "@syntax-color-snippet:                      @syntax-color-string;\n"
-
-    return result
 
 
 def generate_syntax(theme: dict, source: str) -> str:
