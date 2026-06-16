@@ -25,10 +25,10 @@
 @syntax-gutter-background-color-selected:   @syntax-gutter-background-color;
 
 // For git diff info. i.e. in the gutter
-@syntax-color-added:                        .change-hue(green, @syntax-cursor-color)[@result];
-@syntax-color-modified:                     .change-hue(orange, @syntax-cursor-color)[@result];
-@syntax-color-removed:                      .change-hue(red, @syntax-cursor-color)[@result];
-@syntax-color-renamed:                      .change-hue(blue, @syntax-cursor-color)[@result];
+@syntax-color-added:                        .hue-from-color(green, @syntax-cursor-color)[@result];
+@syntax-color-modified:                     .hue-from-color(orange, @syntax-cursor-color)[@result];
+@syntax-color-removed:                      .hue-from-color(red, @syntax-cursor-color)[@result];
+@syntax-color-renamed:                      .hue-from-color(blue, @syntax-cursor-color)[@result];
 
 // For language entity colors
 @syntax-color-variable:                     @base2tone-color-baseB5;
@@ -65,12 +65,12 @@
 @terminal-result-marker-color-selected:     @syntax-result-marker-color-selected;
 
 @terminal-color-black:                      if(@base2tone-colorfulTerminal, greyscale(@syntax-background-color), @base2tone-color-baseA0);
-@terminal-color-red:                        if(@base2tone-colorfulTerminal, .change-hue(red, @syntax-cursor-color)[@result], @base2tone-color-baseB2);
-@terminal-color-green:                      if(@base2tone-colorfulTerminal, .change-hue(green, @syntax-cursor-color)[@result], @base2tone-color-baseD4);
-@terminal-color-yellow:                     if(@base2tone-colorfulTerminal, .change-hue(yellow, @syntax-cursor-color)[@result], @base2tone-color-baseD7);
-@terminal-color-blue:                       if(@base2tone-colorfulTerminal, .change-hue(blue, @syntax-cursor-color)[@result], @base2tone-color-baseB3);
-@terminal-color-magenta:                    if(@base2tone-colorfulTerminal, .change-hue(magenta, @syntax-cursor-color)[@result], @base2tone-color-baseD4);
-@terminal-color-cyan:                       if(@base2tone-colorfulTerminal, .change-hue(cyan, @syntax-cursor-color)[@result], @base2tone-color-baseB4);
+@terminal-color-red:                        if(@base2tone-colorfulTerminal, .hue-from-color(red, @syntax-cursor-color)[@result], @base2tone-color-baseB2);
+@terminal-color-green:                      if(@base2tone-colorfulTerminal, .hue-from-color(green, @syntax-cursor-color)[@result], @base2tone-color-baseD4);
+@terminal-color-yellow:                     if(@base2tone-colorfulTerminal, .hue-from-color(yellow, @syntax-cursor-color)[@result], @base2tone-color-baseD7);
+@terminal-color-blue:                       if(@base2tone-colorfulTerminal, .hue-from-color(blue, @syntax-cursor-color)[@result], @base2tone-color-baseB3);
+@terminal-color-magenta:                    if(@base2tone-colorfulTerminal, .hue-from-color(magenta, @syntax-cursor-color)[@result], @base2tone-color-baseD4);
+@terminal-color-cyan:                       if(@base2tone-colorfulTerminal, .hue-from-color(cyan, @syntax-cursor-color)[@result], @base2tone-color-baseB4);
 @terminal-color-white:                      if(@base2tone-colorfulTerminal, greyscale(@syntax-text-color), @base2tone-color-baseA6);
 
 @terminal-color-bright-black:               if(@base2tone-colorfulTerminal, lighten(@terminal-color-black, 10%), @base2tone-color-baseA3);
