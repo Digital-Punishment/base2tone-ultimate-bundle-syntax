@@ -110,9 +110,9 @@ def generate_readme(name_list: list, pack_dict: dict) -> str:
         f"# {pack_dict['package_title']} Syntax Theme\n"
         f"\n![{pack_dict['package_title']} Banner]"
         f"({theme_github}/blob/master/banner.png?raw=true)\n"
-        f"\n{pack_dict['package_title']} is a syntax theme bundle for Pulsar with "
-        f"{len(name_list)} [{base_name}]({base_github}) "
-        "color schemes inside.\n"
+        f"\n{pack_dict['package_title']} is a syntax theme bundle for Pulsar. "
+        f"It combines **{len(name_list)} [{base_name}]({base_github})** "
+        "color schemes in one package.\n"
         "\n<details>\n"
         f"\n<summary>The following {base_name} color schemes are included:</summary>\n"
     )
@@ -122,10 +122,10 @@ def generate_readme(name_list: list, pack_dict: dict) -> str:
         author = ""
         scheme_filename = lower_filename(name)
         scheme_path = Path(
-            schemes_path / PurePath(scheme_filename).with_suffix(".less")
+            schemes_path / PurePath(scheme_filename).with_suffix(".less"),
         )
         preview_path = Path(
-            schemes_path / PurePath(scheme_filename).with_suffix(".png")
+            schemes_path / PurePath(scheme_filename).with_suffix(".png"),
         )
         with scheme_path.open(mode="r") as scheme_file:
             for line in scheme_file:
@@ -141,7 +141,10 @@ def generate_readme(name_list: list, pack_dict: dict) -> str:
             f"\n> ###### {name} (Author: {'Unknown' if author == '' else author}):\n"
         )
         if preview_path.exists():
-            schemes_list += f">![{name}]({theme_github}/blob/master/styles/schemes/{scheme_filename}.png?raw=true)\n"
+            schemes_list += (
+                f">![{name}]"
+                f"({theme_github}/blob/master/styles/schemes/{scheme_filename}.png?raw=true)\n"
+            )
 
     readme_content += schemes_list
     readme_content += (
@@ -168,14 +171,17 @@ def generate_readme(name_list: list, pack_dict: dict) -> str:
         "\nThe scheme can be changed by choosing a different `scheme` or `style` "
         f"from the drop down menu in the `{pack_dict['package_title']}` _Settings_ "
         "view.\n"
-        "\nAlternatively, the theme can be changed in the Preview Mode. "
-        "Toggle the _Command Palette_ (<kbd>Ctrl + Shift + P</kbd>). Type in "
-        f"`{pack_dict['package_title']} Syntax: Select Theme` and choose another "
-        "theme from the list. While browsing through the list of available "
-        "themes a live preview of each selected theme is automatically applied "
-        "to all open files.\n"
+        "\nAlternatively, both theme and style can be changed in the Preview Mode. "
+        "Open the _Command Palette_ (<kbd>Ctrl + Shift + P</kbd>). Type in "
+        f"`{pack_dict['package_title']}: Select Color Scheme` or "
+        f"`{pack_dict['package_title']}: Select Style` and choose any "
+        "option from the list. While browsing through the list of available "
+        "schemes with arrow keys a live preview of each selected scheme is "
+        "automatically applied to the editor.\n"
         f"\n![{pack_dict['package_title']} Syntax Preview]"
         f"({theme_github}/blob/master/preview.gif?raw=true)\n"
+        "Also, you can use _Command Palette_ to toggle other theme settings or "
+        "reset to default."
         "\n## Credits\n"
         "\nThis is a fork of "
         "[Base16 Syntax Theme](https://packages.pulsar-edit.dev/packages/base16-syntax) "
