@@ -29,14 +29,14 @@
       ]
     },
     "contrastGutter": {
-      "order": 2,
+      "order": 3,
       "title": "Contrast Gutter",
       "description": "Change Gutter background color",
       "type": "boolean",
       "default": true
     },
     "style": {
-      "order": 3,
+      "order": 2,
       "title": "Style",
       "type": "string",
       "default": "Dark",
@@ -46,6 +46,13 @@
         "Light",
         "Light Alt"
       ]
+    },
+    "colorfulTerminal": {
+      "order": 4,
+      "title": "Colorful Terminal",
+      "description": "Use traditional ANSI Colors in Terminal",
+      "type": "boolean",
+      "default": false
     }
   }
 }

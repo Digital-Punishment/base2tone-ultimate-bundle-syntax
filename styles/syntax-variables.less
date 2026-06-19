@@ -1,7 +1,5 @@
-@base2tone-scheme: 'evening';
-@base2tone-style: 'dark';
-@base2tone-contrastGutter: true;
+@import 'base2tone-variables';
+@import 'base2tone-mixins';
+@import 'colors';
 
-@import "schemes/@{base2tone-scheme}";
-@import "@{base2tone-style}/syntax";
-@import "@{base2tone-style}/syntax-variables";
+@import 'styles/@{base2tone-style}-syntax-variables';
